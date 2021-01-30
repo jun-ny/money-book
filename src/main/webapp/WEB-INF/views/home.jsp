@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>가계부 홈</title>
+	<title>가계부 홈 - ignore ver.</title>
 </head>
 <body>
 <h1>
