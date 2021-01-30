@@ -1,0 +1,37 @@
+CREATE TABLE account_table (
+	account_no	number(6)		NOT NULL,
+	account_id	varchar2(100)		unique,
+	account_pw	varchar2(20)		NOT NULL,
+	account_date	date	DEFAULT SYSDATE	NOT NULL
+);
+
+
+
+CREATE TABLE moneybook_table (
+	moneybook_no	number(10)		NOT NULL,
+	account_no	number(6)		NOT NULL,
+	moneybook_category	varchar2(20)		NOT NULL,
+	moneybook_amount	number(10)		NOT NULL,
+	moneybook_type	varchar2(20)		NOT NULL,
+	moneybook_memo	varchar2(2000)		NOT NULL,
+	moneybook_date	date	DEFAULT SYSDATE	NOT NULL
+);
+
+ALTER TABLE account_table ADD CONSTRAINT PK_ACCOUNT_TABLE PRIMARY KEY (
+	account_no
+);
+
+ALTER TABLE moneybook_table ADD CONSTRAINT PK_MONEYBOOK_TABLE PRIMARY KEY (
+	moneybook_no,
+	account_no
+);
+
+ALTER TABLE moneybook_table ADD CONSTRAINT FK_account_table FOREIGN KEY (
+	account_no
+)
+REFERENCES account_table (
+	account_no
+);
+
+CREATE SEQUENCE account_no;
+CREATE SEQUENCE monneybook_no;
