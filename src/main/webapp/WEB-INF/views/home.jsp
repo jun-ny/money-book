@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>가계부 홈</title>
 </head>
 <body>
 <h1>
