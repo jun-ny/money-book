@@ -5,6 +5,38 @@
   
   <mapper namespace="com.money.book.dao.AccountMapper">
   
+  	<insert id="join" parameterType="account">
+  		insert into
+  			account_table(
+  				account_no
+  				,account_id
+  				,account_pw
+  			)values(
+  				account_no.nextval
+  				,#{account_id}
+  				,#{account_pw}
+  			)
+  	</insert>
+  	
+  	<select id="idCheck" parameterType="String" resultType="String">
+  		select
+		    count(*)
+		from
+		    account_table
+		where
+		    account_id = #{account_id}
+  	</select>
   
+  	<select id="selectAccount" parameterType="account" resultType="account">
+  		select
+  			account_no
+  			,account_pw
+  			,account_id
+  			,account_date
+  		from
+  			account_table
+  		where
+  			account_id = #{account_id}
+  	</select>
   
   </mapper>
