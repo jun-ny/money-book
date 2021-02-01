@@ -18,7 +18,7 @@
 			alert("아이디를 입력해주세요.");
 			return;
 		}else if(account_id.length<5 || account_id.length>10){
-			alert("5~10글자로 입력해주세요.");
+			alert("아이디를 5~10글자로 입력해주세요.");
 			return;
 		}
 		
@@ -26,7 +26,7 @@
 			alert("비밀번호를 입력해주세요.");
 			return;
 		}else if(account_pw.length<5 || account_pw.length>10){
-			alert("5~10글자로 입력해주세요.");
+			alert("비밀번호를 5~10글자로 입력해주세요.");
 			return;
 		}
 
@@ -69,17 +69,22 @@
 
 			<td>
 				<input type="text" name="account_id" placeholder="아이디" id="account_id">
-				<span id="loginFail"></span>
+		
 			</td>
 		</tr>
+			
+			
+		
+			
 		<tr>
 			<td>
-				<input type="password" name="account_pw" placeholder="비밀번호" id="account_pw">
+				<input type="password" name="account_pw" placeholder="비밀번호" id="account_pw" style="margin-bottom:5px;">
 			</td>
 		</tr>
 		
 	</table>
-				<input type="button" onclick="login();" style="margin-top:10px;" class="btn btn-success" value="로그인">
+				<div id="loginFail"></div>
+				<input type="button" onclick="login();" style="margin-top:5px;" class="btn btn-success" value="로그인">
 			
 		</form>
 	</div>
