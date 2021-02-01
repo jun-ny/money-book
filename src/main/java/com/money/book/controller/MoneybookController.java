@@ -25,15 +25,41 @@ public class MoneybookController {
 	@RequestMapping(value = "/moneybookList", method = RequestMethod.GET)
 	public String moneybookList(Model model) {
 		
-		ArrayList<MoneybookVO> list = ms.selectPerWeekMoneybook();
+		ArrayList<MoneybookVO> list = ms.selectWeekAgoMoneybook();
 		ArrayList<String> dateList = ms.moneybookDate(list);
-		ArrayList<Integer> cntList = ms.moneybookDateCount(dateList, list);
 		
-		logger.info("{}의 갯수는 {}개", dateList, cntList);
+		logger.info("dateList {}", dateList);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dateList", dateList);
-		model.addAttribute("cntList", cntList);
+		
+		return "moneybook/moneybookList";
+	}
+	
+	@RequestMapping(value = "/monthAgoMoneybook", method = RequestMethod.GET)
+	public String monthAgoMoneybook(Model model) {
+		
+		ArrayList<MoneybookVO> list = ms.selectMonthAgoMoneybook();
+		ArrayList<String> dateList = ms.moneybookDate(list);
+		
+		logger.info("dateList {}", dateList);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dateList", dateList);
+		
+		return "moneybook/moneybookList";
+	}
+	
+	@RequestMapping(value = "/sixMonthAgoMoneybook", method = RequestMethod.GET)
+	public String sixMonthAgoMoneybook(Model model) {
+		
+		ArrayList<MoneybookVO> list = ms.selectSixMonthAgoMoneybook();
+		ArrayList<String> dateList = ms.moneybookDate(list);
+		
+		logger.info("dateList {}", dateList);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dateList", dateList);
 		
 		return "moneybook/moneybookList";
 	}

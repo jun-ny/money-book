@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -37,58 +38,92 @@ public class MoneybookService {
 		return "redirect:/moneybook/moneybookList";
 	}
 	
-	//오늘을 기준으로 일주일 전후 가계부
-	public ArrayList<MoneybookVO> selectPerWeekMoneybook(){
-		
-		int account_no = (int)session.getAttribute("loginNo");
-		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(account_no);
-		
-		ArrayList<MoneybookVO> resultList = new ArrayList<MoneybookVO>();
+	//오늘을 기준으로 일주일 전 가계부
+	public ArrayList<MoneybookVO> selectWeekAgoMoneybook(){
 		
 		//1.오늘 날짜 구하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
 		String stringToday = sdf.format(cal.getTime());
 		
-		//2.오늘 날짜에서 일주일 후 일주일 전 날짜 구하기
-		cal.add(Calendar.DAY_OF_MONTH, -7);
-		String stringBeforeWeekDay = sdf.format(cal.getTime());
+		//2.오늘 날짜에서 일주일 전 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
+		cal.add(Calendar.DAY_OF_MONTH, -8);
+		String stringWeekAgo = sdf.format(cal.getTime());
 		
-		cal.add(Calendar.DAY_OF_MONTH, 14);
-		String stringAfterWeekDay = sdf.format(cal.getTime());
+		logger.info("일주일 전 :{} ~ {}",stringWeekAgo,stringToday);
 		
-		java.util.Date beforeWeekDay = null;
-		java.util.Date afterWeekDay = null;
+		//3.DB에서 해당 날 사이에 있는 가계부 가져오기
+		HashMap<Object, String> map = new HashMap<Object, String>();
+		String account_no = Integer.toString((int)session.getAttribute("loginNo"));
 		
-		try {	
-			beforeWeekDay = sdf.parse(stringBeforeWeekDay);
-			afterWeekDay = sdf.parse(stringAfterWeekDay);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		map.put("account_no",account_no);
+		map.put("start", stringWeekAgo);
+		map.put("end", stringToday);
 		
-		//3.모든 가계부 작성일에서 앞서 구한 일주일 후 일주일 전 사이에 있는 가계부 선택하기
-		for(MoneybookVO moneybook : list) {
-			
-			java.util.Date moneybook_indate = null;
-			
-			try {
-				 moneybook_indate = sdf.parse(moneybook.getMoneybook_date());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			if(beforeWeekDay.before(moneybook_indate) && moneybook_indate.before(afterWeekDay)) {
-				logger.info("{} 는 {} 와 {} 사이 이다.", moneybook.getMoneybook_date(), stringBeforeWeekDay, stringAfterWeekDay);
-				resultList.add(moneybook);
-			}
-			
-		}
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
 		
 		//4.return 값으로 선택된 가계부 return 하기
-		return resultList;
+		return list;
 	}
 	
+	//오늘 기준 한달 전 가계부
+	public ArrayList<MoneybookVO> selectMonthAgoMoneybook() {
+
+		//1.오늘 날짜 구하기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String stringToday = sdf.format(cal.getTime());
+		
+		//2.오늘 날짜에서 한달전 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
+		cal.add(Calendar.DAY_OF_MONTH, -31);
+		String StringMonthAgo = sdf.format(cal.getTime());
+		
+		logger.info("한달 전 :{} ~ {}",StringMonthAgo,stringToday);
+		
+		//3.DB에서 해당 날 사이에 있는 가계부 가져오기
+		HashMap<Object, String> map = new HashMap<Object, String>();
+		String account_no = Integer.toString((int)session.getAttribute("loginNo"));
+		
+		map.put("account_no",account_no);
+		map.put("start", StringMonthAgo);
+		map.put("end", stringToday);
+		
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
+		
+		//4.return 값으로 선택된 가계부 return 하기
+		return list;
+	}
+		
+	//오늘 기준 6개월전 가계부
+	public ArrayList<MoneybookVO> selectSixMonthAgoMoneybook() {
+		
+		//1.오늘 날짜 구하기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String stringToday = sdf.format(cal.getTime());
+		
+		//2.오늘 날짜에서 6개월전 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
+		cal.add(Calendar.DAY_OF_MONTH, -181);
+		String stringSixMonthAgo = sdf.format(cal.getTime());
+		
+		logger.info("6개월전 :{} ~ {}",stringSixMonthAgo,stringToday);
+		
+		//3.DB에서 해당 날 사이에 있는 가계부 가져오기
+		HashMap<Object, String> map = new HashMap<Object, String>();
+		String account_no = Integer.toString((int)session.getAttribute("loginNo"));
+		
+		map.put("account_no",account_no);
+		map.put("start", stringSixMonthAgo);
+		map.put("end", stringToday);
+		
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
+		
+		//4.return 값으로 선택된 가계부 return 하기
+		return list;
+	}
 	
 	//가계부의 중복되는 날짜 빼기
 	public ArrayList<String> moneybookDate(ArrayList<MoneybookVO> list){
@@ -100,38 +135,16 @@ public class MoneybookService {
 			if(dateList.isEmpty()) {
 				dateList.add(moneybook.getMoneybook_date());
 			} else {
-				
 				if(!dateList.contains(moneybook.getMoneybook_date())) {
 					dateList.add(moneybook.getMoneybook_date());
 				}
-				
 			}
 		}
-
+		
+		Collections.sort(dateList);
+		
 		return dateList;
 	}
-	
-	
-	//가계부의 날짜 갯수 구하기
-	public ArrayList<Integer> moneybookDateCount(ArrayList<String> dateList, ArrayList<MoneybookVO> moneybookList){
-		
-		ArrayList<Integer> cntList = new ArrayList<Integer>();
-		
-		for(String date : dateList) {
-			int cnt = 0;
-			for(MoneybookVO moneybook : moneybookList) {
-				if(date.equals(moneybook.getMoneybook_date())) {
-					cnt++;
-				}
-			}
-			
-			cntList.add(cnt);
-		}
-		
-		return cntList;
-	}
-	
-	
 	
 	
 }

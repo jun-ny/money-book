@@ -1,6 +1,7 @@
 package com.money.book.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,20 @@ public class MoneybookDAO {
 		
 		return list;
 		
+	}
+	
+	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map){
+		
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		ArrayList<MoneybookVO> list = null;
+		
+		try {
+			list = mm.selectMoneybookDate(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	

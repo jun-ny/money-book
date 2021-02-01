@@ -40,6 +40,23 @@
 		order by
 		    moneybook_date desc	
   	</select>
+  	
+  	<select id="selectMoneybookDate" parameterType="hashmap" resultType="moneybook">
+  		select
+		   moneybook_no
+		    ,account_no
+		    ,moneybook_amount
+		    ,moneybook_category
+		    ,moneybook_type
+		    ,moneybook_memo
+		    ,to_char(moneybook_date, 'yyyy-mm-dd') as moneybook_date
+		from
+		    moneybook_table
+		where
+			account_no = #{account_no} 
+		and
+		    moneybook_date between #{start} and #{end}
+  	</select>
   
   
   
