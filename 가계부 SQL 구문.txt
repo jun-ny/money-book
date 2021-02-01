@@ -34,4 +34,4 @@ REFERENCES account_table (
 );
 
 CREATE SEQUENCE account_no;
-CREATE SEQUENCE monneybook_no;
+CREATE SEQUENCE moneybook_no;

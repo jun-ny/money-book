@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.money.book.dao.MoneybookMapper">
+  
+  	<insert id="writeMoneybook" parameterType="moneybook">
+  		insert into
+  			moneybook_table(
+  				moneybook_no
+  				,account_no
+  				,moneybook_amount
+  				,moneybook_category
+  				,moneybook_type
+  				,moneybook_memo
+  			)values(
+  				moneybook_no.nextval
+  				,#{account_no}
+  				,#{moneybook_amount}
+  				,#{moneybook_category}
+  				,#{moneybook_type}
+  				,#{moneybook_memo}
+  			)
+  	</insert>
+  	
+  	<select id="selectAllMoneybook" parameterType="int" resultType="moneybook">
+  		select
+		    moneybook_no
+		    ,account_no
+		    ,moneybook_amount
+		    ,moneybook_category
+		    ,moneybook_type
+		    ,moneybook_memo
+		    ,to_char(moneybook_date, 'yyyy-mm-dd') as moneybook_date
+		from
+		    moneybook_table
+		where
+		    account_no = #{account_no}
+		order by
+		    moneybook_date desc	
+  	</select>
+  
+  
+  
+ </mapper>

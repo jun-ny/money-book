@@ -10,11 +10,11 @@
 	<c:choose>
 		<c:when test="${not empty sessionScope.loginId }">
 		
-			<h2>${sessionScope.loginId }님 환영합니다</h2>
+			<h2>${sessionScope.loginId }님 환영합니다.</h2>
 		
 			<ul>
 				<li>
-					<a href="">가계부</a>
+					<a href="/moneybook/moneybookList">가계부</a>
 				</li>
 				<li>
 					<a href="/account/logout">로그아웃</a>

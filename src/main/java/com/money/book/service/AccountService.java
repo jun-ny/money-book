@@ -41,7 +41,8 @@ public class AccountService {
 		AccountVO check_account = dao.selectAccount(account);
 		
 		if(check_account != null && account.getAccount_pw().equals(check_account.getAccount_pw())) {
-			session.setAttribute("loginId", account.getAccount_id());
+			session.setAttribute("loginId", check_account.getAccount_id());
+			session.setAttribute("loginNo", check_account.getAccount_no());
 			return "1";
 		}else {
 			return "0";

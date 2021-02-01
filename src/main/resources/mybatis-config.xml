@@ -6,10 +6,12 @@
 
 	<typeAliases>
 		<typeAlias type="com.money.book.vo.AccountVO" alias="account"/>
+		<typeAlias type="com.money.book.vo.MoneybookVO" alias="moneybook"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/accountMapper.xml"/>
+		<mapper resource="mapper/moneybookMapper.xml"/>
 	</mappers>
 	
 </configuration>
