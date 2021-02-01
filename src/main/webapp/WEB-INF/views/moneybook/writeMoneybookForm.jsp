@@ -2,11 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/sketchy/bootstrap.min.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>가계부 작성</title>
 <script type="text/javascript" src="/resources/jquery-3.4.1.js"></script>
 <script type="text/javascript">
+
+
 	function checkForm(){
 
 		var moneybook_amount = document.getElementById("moneybook_amount").value;
@@ -72,34 +78,46 @@
 		}
 		
 	}
+
+
 </script>
+
 </head>
+
 <body>
-	<h1>[가계부 작성]</h1>
+	<div align=center>
+	<a href="/" class="display-3"><img
+			src="/resources/image/moneybook_logo.png"
+			style="width: 20%; display: block; padding-bottom: 20px; padding-top: 20px;"></a>
+	<div class="jumbotron" style="width: 20%;">
+	<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header" style="padding-bottom: 0px;"><marquee>💸</marquee></div>
+  <div class="card-body">
 	<form action="/moneybook/writeMoneybook" method="get" onsubmit="return checkForm();">
-		<table>
+	
+		<table style="margin-bottom:10px">
 			<tr>
-				<td>내용</td>
-				<td><input type="text" name="moneybook_memo" id="moneybook_memo"></td>
+			<!-- 	<td>내용</td> -->
+				<td style="padding-left:5px"><input type="text" name="moneybook_memo" id="moneybook_memo" placeholder="내용"></td>
 			</tr>
 			<tr>
-				<td>금액</td>
-				<td><input type="text" name="moneybook_amount" id="moneybook_amount"></td>
+			<!-- 	<td>금액</td> -->
+				<td style="padding-left:5px"><input type="text" name="moneybook_amount" id="moneybook_amount" placeholder="금액"></td>
 			</tr>		
 			<tr>
-				<td>종류</td>
-				<td>
-					<select onchange="changeCategory(this);" name="moneybook_type" id="moneybook_type">
+				<!-- <td>종류</td> -->
+				<td style="float:left; width:50%;">
+					<select class="custom-select" onchange="changeCategory(this);" name="moneybook_type" id="moneybook_type" style="font-size:10px;">
 						<option value="수입">수입</option>
 						<option value="지출">지출</option>
 					</select>
 				</td>
-			</tr>		
-			<tr>
-				<td>분류</td>
-				<td>
+
+			
+		<!-- 		<td>분류</td> -->
+				<td	style="float:right; width:50%;">
 					<span id="changeCategory">
-						<select name="moneybook_category" id="moneybook_category">
+						<select class="custom-select" name="moneybook_category" id="moneybook_category" style="font-size:10px;">
 							<option value="월급">월급</option>
 							<option value="부수입">부수입</option>
 							<option value="용돈">용돈</option>
@@ -109,13 +127,17 @@
 						</select>
 					</span>
 				</td>
-			</tr>		
-			<tr>
-				<td>
-					<input type="submit" value="작성하기">
-				</td>
-			</tr>		
+			</tr>				
 		</table>
+					<a href="/" class="btn btn-outline-danger" style="height: 36px;" role="button">🔙</a>
+					<input class="btn btn-outline-success" type="submit" style="height: 36px;" value="✏️">
 	</form>
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
 </body>
 </html>
