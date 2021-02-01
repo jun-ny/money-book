@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" rel="stylesheet">
+
 <meta charset="UTF-8">
 <title>로그인</title>
 <script type="text/javascript" src="/resources/jquery-3.4.1.js"></script>
@@ -56,28 +58,32 @@
 </style>
 </head>
 <body>
-	<h1>[로그인]</h1>
-
+<div align="center">
+	<a href="/" class="display-3"><img
+		src="/resources/image/moneybook_logo.png"
+		style="width:20%; display: block; padding-bottom: 20px;padding-top: 20px;"></a>
+<div class="card bg-light mb-3" style="max-width: 50%; padding-top: 20px; padding-bottom: 20px; align: center;">
+	<form>
 	<table>
 		<tr>
-			<td>로그인</td>
+
 			<td>
-				<input type="text" name="account_id" id="account_id">
+				<input type="text" name="account_id" placeholder="아이디" id="account_id">
 				<span id="loginFail"></span>
 			</td>
 		</tr>
 		<tr>
-			<td>비밀번호</td>
 			<td>
-				<input type="password" name="account_pw" id="account_pw">
+				<input type="password" name="account_pw" placeholder="비밀번호" id="account_pw">
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<input type="button" onclick="login();" value="회원가입">
-			</td>
-		</tr>
+		
 	</table>
+				<input type="button" onclick="login();" style="margin-top:10px;" class="btn btn-success" value="로그인">
+			
+		</form>
+	</div>
+	</div>
 
 </body>
 </html>
