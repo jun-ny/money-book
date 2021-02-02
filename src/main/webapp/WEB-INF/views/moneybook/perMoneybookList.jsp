@@ -14,6 +14,11 @@
 <title>가계부</title>
 <script type="text/javascript" src="/resources/jquery-3.4.1.js"></script>
 <script type="text/javascript">
+	function changePerWeekMoneybook(no){
+		var no = $(no).val();
+		location.href = "/moneybook/perWeekMoneybookList?no="+no;
+	}
+
 	function moneybookList(){
 		location.href = "/moneybook/moneybookList";
 	}
@@ -25,7 +30,6 @@
 	function perMonthMoneybookList(){
 		location.href = "/moneybook/perMonthMoneybookList";
 	}
-
 </script>
 </head>
 <body>
@@ -68,6 +72,8 @@
 		
 		<br>
 		
+		<span id="changeMonth"></span>
+		
 		<table border="1">
 			<c:forEach items="${list }" var="list">
 				<tr>
@@ -92,6 +98,38 @@
 	</div>
 	</div>	
 	
+	<input type="hidden" value="${no }" id="no">
+	<input type="hidden" value="${month }" id="time">
+	<input type="hidden" value="${type }" id="type">
+	
+	<script type="text/javascript">
+		$(function(){
+			var type = $("#type").val();
 
+			if(type=="week"){
+				var time = $("#time").val();
+				var no = $("#no").val();
+	
+				if(no==0){
+					no = time;
+				}
+	
+				var item = "<select onchange='changePerWeekMoneybook(this)'>";
+					
+				for(var i = 1 ; i <= time ; i++){
+					if(no==i){
+						item += "<option value = "+"\'"+i+"\'"+" selected='selected' >"+i+"월</option>";		
+					}else{
+						item += "<option value = "+"\'"+i+"\'"+">"+i+"월</option>";
+					}
+				}
+				
+				item += "</select>";
+						
+				$("#changeMonth").append(item);
+			}
+			
+		});
+	</script>
 </body>
 </html>

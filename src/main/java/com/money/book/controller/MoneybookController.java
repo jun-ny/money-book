@@ -1,8 +1,10 @@
 package com.money.book.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.money.book.service.MoneybookService;
 import com.money.book.vo.MoneybookVO;
@@ -69,13 +72,21 @@ public class MoneybookController {
 	}
 	
 	@RequestMapping(value = "/perWeekMoneybookList", method = RequestMethod.GET )
-	public String perWeekMoneybookList(Model model) {
+	public String perWeekMoneybookList(Model model,@RequestParam(defaultValue = "0") int no) {
 		
-		ArrayList<HashMap<String, Object>> list = ms.perWeekMoneybook();
+		Calendar cal = Calendar.getInstance();
+		
+		logger.info("no : {}", no);
+		
+		ArrayList<HashMap<String, Object>> list = ms.perWeekMoneybook(no);
+		int month = cal.get(Calendar.MONTH) + 1;
 		
 		logger.info("일주일 단위 가계부 : {}",list);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("month", month);
+		model.addAttribute("no", no);
+		model.addAttribute("type", "week");
 		
 		return "moneybook/perMoneybookList";
 	}
@@ -88,6 +99,7 @@ public class MoneybookController {
 		logger.info("월단위 가계부 : {}",list);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("type", "month");
 		
 		return "moneybook/perMoneybookList";
 	}
