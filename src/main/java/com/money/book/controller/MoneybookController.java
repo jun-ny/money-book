@@ -33,6 +33,7 @@ public class MoneybookController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dateList", dateList);
+		model.addAttribute("type", "week");
 		
 		return "moneybook/moneybookList";
 	}
@@ -47,6 +48,7 @@ public class MoneybookController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dateList", dateList);
+		model.addAttribute("type", "month");
 		
 		return "moneybook/moneybookList";
 	}
@@ -61,6 +63,7 @@ public class MoneybookController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dateList", dateList);
+		model.addAttribute("type", "sixMonth");
 		
 		return "moneybook/moneybookList";
 	}

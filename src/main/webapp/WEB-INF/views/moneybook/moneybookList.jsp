@@ -77,11 +77,29 @@
 
 		<div class="jumbotron">
 		
-		<select onchange="changeMoneybook(this);">
-			<option value="week">1주일</option>
-			<option value="month">1개월</option>
-			<option value="sixMonth">6개월</option>
-		</select>
+		<c:choose>
+			<c:when test="${type == 'week' }">
+				<select onchange="changeMoneybook(this);">
+					<option value="week" selected="selected">1주일</option>
+					<option value="month">1개월</option>
+					<option value="sixMonth">6개월</option>
+				</select>
+			</c:when>
+			<c:when test="${type == 'month' }">
+				<select onchange="changeMoneybook(this);">
+					<option value="week">1주일</option>
+					<option value="month" selected="selected">1개월</option>
+					<option value="sixMonth">6개월</option>
+				</select>
+			</c:when>
+			<c:otherwise>
+				<select onchange="changeMoneybook(this);">
+					<option value="week">1주일</option>
+					<option value="month">1개월</option>
+					<option value="sixMonth" selected="selected">6개월</option>
+				</select>
+			</c:otherwise>
+		</c:choose>
 	
 		<br>
 
