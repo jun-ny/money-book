@@ -43,7 +43,7 @@
   	
   	<select id="selectMoneybookDate" parameterType="hashmap" resultType="moneybook">
   		select
-		   moneybook_no
+		   	moneybook_no
 		    ,account_no
 		    ,moneybook_amount
 		    ,moneybook_category

@@ -41,7 +41,7 @@ public class MoneybookService {
 	//오늘을 기준으로 일주일 전 가계부
 	public ArrayList<MoneybookVO> selectWeekAgoMoneybook(){
 		
-		//1.오늘 날짜 구하기
+		//1.오늘 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -70,7 +70,7 @@ public class MoneybookService {
 	//오늘 기준 한달 전 가계부
 	public ArrayList<MoneybookVO> selectMonthAgoMoneybook() {
 
-		//1.오늘 날짜 구하기
+		//1.오늘 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -99,7 +99,7 @@ public class MoneybookService {
 	//오늘 기준 6개월전 가계부
 	public ArrayList<MoneybookVO> selectSixMonthAgoMoneybook() {
 		
-		//1.오늘 날짜 구하기
+		//1.오늘 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
