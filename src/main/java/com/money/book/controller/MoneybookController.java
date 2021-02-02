@@ -1,6 +1,7 @@
 package com.money.book.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,31 @@ public class MoneybookController {
 		
 		return "moneybook/moneybookList";
 	}
+	
+	@RequestMapping(value = "/perWeekMoneybookList", method = RequestMethod.GET )
+	public String perWeekMoneybookList(Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ms.perWeekMoneybook();
+		
+		logger.info("일주일 단위 가계부 : {}",list);
+		
+		model.addAttribute("list", list);
+		
+		return "moneybook/perMoneybookList";
+	}
+	
+	@RequestMapping(value = "/perMonthMoneybookList", method = RequestMethod.GET)
+	public String perMonthMoneybookList(Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ms.perMonthMoneybookList();
+		
+		logger.info("월단위 가계부 : {}",list);
+		
+		model.addAttribute("list", list);
+		
+		return "moneybook/perMoneybookList";
+	}
+	
 	
 	@RequestMapping(value = "/writeMoneybookForm", method = RequestMethod.GET)
 	public String writeMoneybookForm() {

@@ -58,5 +58,19 @@ public class MoneybookDAO {
 		return list;
 	}
 	
+	public int sumMoneybookAmount(HashMap<String, Object> map) {
+		
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		int amount = 0;
+		
+		try {
+			amount = mm.sumMoneybookAmount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return amount;
+	}
+	
 	
 }

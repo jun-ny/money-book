@@ -58,6 +58,18 @@
 		    moneybook_date between #{start} and #{end}
   	</select>
   
+  	<select id="sumMoneybookAmount" parameterType="hashmap" resultType="int">
+  		select
+		    sum(moneybook_amount)
+		from
+		    moneybook_table
+		where
+		    moneybook_date between #{start} and #{end}
+		and
+		    moneybook_type = #{moneybook_type}
+		and
+		    account_no = #{account_no}
+  	</select>
   
   
  </mapper>

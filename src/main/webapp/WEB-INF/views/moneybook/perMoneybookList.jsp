@@ -26,17 +26,6 @@
 		location.href = "/moneybook/perMonthMoneybookList";
 	}
 
-	function changeMoneybook(period){
-
-		if($(period).val() == "week"){
-			location.href = "/moneybook/moneybookList";
-		}else if($(period).val() == "month"){
-			location.href = "/moneybook/monthAgoMoneybook";
-		}else{
-			location.href = "/moneybook/sixMonthAgoMoneybook";
-		}
-
-	}
 </script>
 </head>
 <body>
@@ -77,30 +66,24 @@
 
 		<div class="jumbotron">
 		
-		<select onchange="changeMoneybook(this);">
-			<option value="week">1주일</option>
-			<option value="month">1개월</option>
-			<option value="sixMonth">6개월</option>
-		</select>
-	
 		<br>
-
+		
 		<table border="1">
-			<c:forEach items="${dateList }" var="date">
+			<c:forEach items="${list }" var="list">
 				<tr>
-					<td colspan="3" style="text-align: center">${date }</td>
+					<td colspan="4" style="text-align: center;">${list.period }</td>
 				</tr>
-				<c:forEach items="${list }" var="list">
-					<c:if test="${date == list.moneybook_date }">
-						<tr>
-							<td>${list.moneybook_memo }</td>
-							<td>${list.moneybook_amount }</td>
-							<td>${list.moneybook_type }</td>
-						</tr>
-					</c:if>
-				</c:forEach>
+				<tr>
+					<td>${list.in }</td>
+					<td>${list.inAmount }</td>
+					<td>${list.out }</td>
+					<td>${list.outAmount }</td>
+				</tr>
+			
+			
 			</c:forEach>
 		</table>
+
 		
 		<button onclick="moneybookList();">일일</button>
 		<button onclick="perWeekMoneybookList();">주별</button>

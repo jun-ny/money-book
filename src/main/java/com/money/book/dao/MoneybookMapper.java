@@ -13,4 +13,6 @@ public interface MoneybookMapper {
 	
 	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map);
 	
+	public int sumMoneybookAmount(HashMap<String, Object> map);
+	
 }
