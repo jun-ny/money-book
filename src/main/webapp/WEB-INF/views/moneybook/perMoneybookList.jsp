@@ -73,11 +73,11 @@
 		<br>
 		
 		<span id="changeMonth"></span>
-		
+		<div class="card border-primary mb-3" style="width:30%; text-align: center;">
 		<table border="1">
 			<c:forEach items="${list }" var="list">
 				<tr>
-					<td colspan="4" style="text-align: center;">${list.period }</td>
+					<th colspan="4" style="text-align: center;">${list.period }</th>
 				</tr>
 				<tr>
 					<td>${list.in }</td>
@@ -89,11 +89,12 @@
 			
 			</c:forEach>
 		</table>
+		</div>
 
 		
-		<button onclick="moneybookList();">일일</button>
-		<button onclick="perWeekMoneybookList();">주별</button>
-		<button onclick="perMonthMoneybookList();">월별</button>
+		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
+		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
+		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
 		
 	</div>
 	</div>	
@@ -114,7 +115,7 @@
 					no = time;
 				}
 	
-				var item = "<select onchange='changePerWeekMoneybook(this)'>";
+				var item = "<select class='custom-select' style='width:10%; margin-bottom:10px;' onchange='changePerWeekMoneybook(this)'>";
 					
 				for(var i = 1 ; i <= time ; i++){
 					if(no==i){
