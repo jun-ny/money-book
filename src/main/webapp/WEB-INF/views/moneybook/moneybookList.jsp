@@ -134,20 +134,18 @@
 					<option value="month">1개월</option>
 					<option value="sixMonth">6개월</option>
 				</select>
-		<div style="margin-bottom:10px">					
-		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
-		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
-		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
-		</div>
-					<h2>${cnt } 건의 내역이 있습니다.</h2>
 			</c:when>
+			
 			<c:when test="${type == 'month' }">
 				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week">1주일</option>
 					<option value="month" selected="selected">1개월</option>
 					<option value="sixMonth">6개월</option>
 				</select>
+				
+				
 			</c:when>
+			
 			<c:otherwise>
 				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week">1주일</option>
@@ -156,6 +154,14 @@
 				</select>
 			</c:otherwise>
 		</c:choose>
+		
+		<div style="margin-bottom:10px">					
+			<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
+			<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
+			<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
+		</div>
+					
+		<h2>${cnt } 건의 내역이 있습니다.</h2>
 		
 		<div>
 	

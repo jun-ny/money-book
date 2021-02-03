@@ -46,7 +46,7 @@
 		
 		if($(type).val()=="지출"){
 			var txt = 	"<span id='changeCategory'>"
-				txt += 	"<select name='moneybook_category' id='moneybook_category'>"
+				txt += 	"<select class='custom-select' name='moneybook_category' id='moneybook_category' style='font-size:10px; width: 70px;'>"
 				txt += 		"<option value='식비'>식비</option>"
 				txt += 		"<option value='교통/차량'>교통/차량</option>"
 				txt +=		"<option value='문화생활'>문화생활</option>"
@@ -64,7 +64,7 @@
 				$("#changeCategory").replaceWith(txt);
 		}else{
 			var txt = 	"<span id='changeCategory'>"
-				txt += 	"<select name='moneybook_category' id='moneybook_category'>"
+				txt += 	"<select class='custom-select' name='moneybook_category' id='moneybook_category' style='font-size:10px; width: 70px;'>"
 				txt += 		"<option value='월급'>월급</option>"
 				txt += 		"<option value='부수입'>부수입</option>"
 				txt +=		"<option value='용돈'>용돈</option>"
@@ -105,19 +105,19 @@
 				<td style="padding-left:5px"><input type="text" name="moneybook_amount" id="moneybook_amount" placeholder="금액"></td>
 			</tr>		
 			<tr>
-				<!-- <td>종류</td> -->
-				<td style="float:left; width:50%;">
-					<select class="custom-select" onchange="changeCategory(this);" name="moneybook_type" id="moneybook_type" style="font-size:10px;">
-						<option value="수입">수입</option>
-						<option value="지출">지출</option>
-					</select>
-				</td>
-
 			
-		<!-- 		<td>분류</td> -->
+			<!-- <td>종류</td> -->
+			<td style="float:left; width:50%;">
+				<select class="custom-select" onchange="changeCategory(this);" name="moneybook_type" id="moneybook_type" style="font-size:10px; width: 70px;">
+					<option value="수입">수입</option>
+					<option value="지출">지출</option>
+				</select>
+			</td>
+			
+			<!--<td>분류</td> -->
 				<td	style="float:right; width:50%;">
 					<span id="changeCategory">
-						<select class="custom-select" name="moneybook_category" id="moneybook_category" style="font-size:10px;">
+						<select class="custom-select" name="moneybook_category" id="moneybook_category" style="font-size:10px; width: 70px;">
 							<option value="월급">월급</option>
 							<option value="부수입">부수입</option>
 							<option value="용돈">용돈</option>
