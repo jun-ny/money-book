@@ -6,9 +6,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
 	rel="stylesheet">
+
+<style>
+  #font1{
+        font-family: 'Yeon Sung', cursive;
+        color: green;
+        font-size:large;
+      }
+      #font2{
+        font-family: 'Indie Flower', cursive;
+      }
+</style>
+
 
 <meta charset="UTF-8">
 <title>가계부</title>
@@ -101,7 +115,7 @@
 			</div>
 		</nav>
 
-		<div class="jumbotron">
+		<div class="jumbotron" style="background-color: #edffe0">
 		
 		<c:choose>
 			<c:when test="${type == 'week' }">
@@ -135,17 +149,17 @@
 		
 		<div>
 	
-		<div class="card border-primary mb-3" style="width:30%; text-align: center; margin-bottom:0px;">
+		<div class="card border-success mb-3" style="width:30%; text-align: center; margin-bottom:0px;">
 		
 
-		<table border="1"  >
+		<table id="font1">
 			<c:forEach items="${dateList }" var="date">
-				<tr>
-					<th colspan="3" style="text-align: center">${date }</th>
+				<tr style="background-color: #d1f5b4">
+					<th colspan="3" style="text-align: center;">${date }</th>
 				</tr>
 				<c:forEach items="${list }" var="list">
 					<c:if test="${date == list.moneybook_date }">
-						<tr>
+						<tr style="background-color: #edffe080">
 							<td>${list.moneybook_memo }</td>
 							<td>${list.moneybook_amount }</td>
 							<td>${list.moneybook_type }</td>
@@ -156,12 +170,21 @@
 		</table>
 		
 		</div>
-<div id=navigator align=center>
-	<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})" style="font-size: 30px;">👈🏻️️</a> &nbsp;&nbsp;
-<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})" style="font-size: 30px;">👉🏻️</a> 
- 	<form id="pagingForm" method="get" action="moneybookList">
-<input type="hidden" name="page" id="page" />
-</form>
+<!-- 페이지 이동 부분 -->                      
+	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+
+	<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
+		<c:if test="${counter == navi.currentPage}"><b></c:if>
+			<a id=font1 href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+		<c:if test="${counter == navi.currentPage}"></b></c:if>
+	</c:forEach>
+	&nbsp;&nbsp;
+	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
+	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
+	</div> 
+	<form id="pagingForm" method="get" action="moneybookList">
+<input type="hidden" name="page" id="page" /> </form>
   </div>
 
 	</div>
