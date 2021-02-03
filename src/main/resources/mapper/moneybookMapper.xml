@@ -96,6 +96,14 @@
 		and
 			moneybook_type = '지출'
   	</select>
+  	
+  	<select id="boardTotal" parameterType="string" resultType="int">
+	select 
+		count(*)
+	from 
+		moneybook_table
+	</select>
+  
   
   
  </mapper>

@@ -3,6 +3,7 @@ package com.money.book.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,18 +45,33 @@ public class MoneybookDAO {
 		
 	}
 	
-	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map){
+	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map, int startRecord, int countPerPage){
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		ArrayList<MoneybookVO> list = null;
 		
+		RowBounds rb = new RowBounds(startRecord, countPerPage);
+		
 		try {
-			list = mm.selectMoneybookDate(map);
+			list = mm.selectMoneybookDate(map, rb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return list;
+	}
+	
+	public int boardTotal(String searchText) {
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		int amount = 0;
+
+		try {
+			amount = mm.boardTotal(searchText);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return amount;
 	}
 	
 	public int sumMoneybookAmount(HashMap<String, Object> map) {

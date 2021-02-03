@@ -73,6 +73,11 @@
 		<br>
 		
 		<span id="changeMonth"></span>
+				<div style="margin-bottom:10px;">					
+		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
+		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
+		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
+		</div>
 		<div class="card border-primary mb-3" style="width:30%; text-align: center;">
 		<table border="1">
 			<c:forEach items="${list }" var="list">
@@ -92,9 +97,7 @@
 		</div>
 
 		
-		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
-		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
-		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
+		
 		
 	</div>
 	</div>	

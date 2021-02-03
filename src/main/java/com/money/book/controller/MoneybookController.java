@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.money.book.service.MoneybookService;
+import com.money.book.util.PageNavigator;
 import com.money.book.vo.MoneybookVO;
 
 @Controller
@@ -24,19 +25,31 @@ import com.money.book.vo.MoneybookVO;
 public class MoneybookController {
 
 	private Logger logger = LoggerFactory.getLogger(MoneybookController.class);
+	private final int COUNTPERPAGE = 5;
+	private final int PAGEPERGROUP = 5;
 	
 	@Autowired
 	private MoneybookService ms;
 	
 	@RequestMapping(value = "/moneybookList", method = RequestMethod.GET)
-	public String moneybookList(Model model) {
+	public String moneybookList(
+			@RequestParam(value = "page", defaultValue= "1") int page,
+			@RequestParam(value = "searchText", defaultValue = "") String searchText, 
+			Model model) {
 		
-		ArrayList<MoneybookVO> list = ms.selectWeekAgoMoneybook();
+		int cnt = ms.boardTotal(searchText);
+		System.out.println("현재 가계부 항목의 개수 : " +cnt);
+		PageNavigator navi = new PageNavigator(COUNTPERPAGE, PAGEPERGROUP, page, cnt);
+
+		
+		ArrayList<MoneybookVO> list = ms.selectWeekAgoMoneybook(navi.getStartRecord(), navi.getCountPerPage());
 		ArrayList<String> dateList = ms.moneybookDate(list);
 		
 		logger.info("dateList {}", dateList);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("navi", navi);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dateList", dateList);
 		model.addAttribute("type", "week");
 		
@@ -44,9 +57,15 @@ public class MoneybookController {
 	}
 	
 	@RequestMapping(value = "/monthAgoMoneybook", method = RequestMethod.GET)
-	public String monthAgoMoneybook(Model model) {
+	public String monthAgoMoneybook(
+			@RequestParam(value = "page", defaultValue= "1") int page,
+			@RequestParam(value = "searchText", defaultValue = "") String searchText, 
+			Model model) {
 		
-		ArrayList<MoneybookVO> list = ms.selectMonthAgoMoneybook();
+		int cnt = ms.boardTotal(searchText);
+		PageNavigator navi = new PageNavigator(COUNTPERPAGE, PAGEPERGROUP, page, cnt);
+
+		ArrayList<MoneybookVO> list = ms.selectMonthAgoMoneybook(navi.getStartRecord(), navi.getCountPerPage());
 		ArrayList<String> dateList = ms.moneybookDate(list);
 		
 		logger.info("dateList {}", dateList);
@@ -54,14 +73,21 @@ public class MoneybookController {
 		model.addAttribute("list", list);
 		model.addAttribute("dateList", dateList);
 		model.addAttribute("type", "month");
+		model.addAttribute("cnt", cnt);
 		
 		return "moneybook/moneybookList";
 	}
 	
 	@RequestMapping(value = "/sixMonthAgoMoneybook", method = RequestMethod.GET)
-	public String sixMonthAgoMoneybook(Model model) {
+	public String sixMonthAgoMoneybook(
+			@RequestParam(value = "page", defaultValue= "1") int page,
+			@RequestParam(value = "searchText", defaultValue = "") String searchText, 
+			Model model) {
 		
-		ArrayList<MoneybookVO> list = ms.selectSixMonthAgoMoneybook();
+		int cnt = ms.boardTotal(searchText);
+		PageNavigator navi = new PageNavigator(COUNTPERPAGE, PAGEPERGROUP, page, cnt);
+
+		ArrayList<MoneybookVO> list = ms.selectSixMonthAgoMoneybook(navi.getStartRecord(), navi.getCountPerPage());
 		ArrayList<String> dateList = ms.moneybookDate(list);
 		
 		logger.info("dateList {}", dateList);
@@ -69,7 +95,8 @@ public class MoneybookController {
 		model.addAttribute("list", list);
 		model.addAttribute("dateList", dateList);
 		model.addAttribute("type", "sixMonth");
-		
+		model.addAttribute("cnt", cnt);
+
 		return "moneybook/moneybookList";
 	}
 	

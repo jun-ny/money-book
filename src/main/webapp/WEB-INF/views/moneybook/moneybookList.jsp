@@ -110,6 +110,12 @@
 					<option value="month">1개월</option>
 					<option value="sixMonth">6개월</option>
 				</select>
+		<div style="margin-bottom:10px">					
+		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
+		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
+		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
+		</div>
+					<h2>${cnt } 건의 내역이 있습니다.</h2>
 			</c:when>
 			<c:when test="${type == 'month' }">
 				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
@@ -127,9 +133,9 @@
 			</c:otherwise>
 		</c:choose>
 		
-		
-		
-		<div class="card border-primary mb-3" style="width:30%; text-align: center;">
+		<div>
+	
+		<div class="card border-primary mb-3" style="width:30%; text-align: center; margin-bottom:0px;">
 		
 
 		<table border="1"  >
@@ -149,34 +155,19 @@
 			</c:forEach>
 		</table>
 		
-		
-	</div>
-		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
-		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
-		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
-	<br>
-	
-	<div id="navigator">
-	<!-- 페이지 이동 부분 -->                      
-	<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
-	<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
-
-	<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
-		<c:if test="${counter == navi.currentPage}"><b></c:if>
-			<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
-		<c:if test="${counter == navi.currentPage}"></b></c:if>
-	</c:forEach>
-	&nbsp;&nbsp;
-	<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
-	<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
-	<!-- 페이지 이동 끝 -->   
-
-<form id="pagingForm" method="get" action="boardList">
+		</div>
+<div id=navigator align=center>
+	<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})" style="font-size: 30px;">👈🏻️️</a> &nbsp;&nbsp;
+<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})" style="font-size: 30px;">👉🏻️</a> 
+ 	<form id="pagingForm" method="get" action="moneybookList">
 <input type="hidden" name="page" id="page" />
 </form>
+  </div>
+
 	</div>
 	</div>
-	</div>	
+	</div>
+	
 	
 
 </body>

@@ -39,7 +39,7 @@ public class MoneybookService {
 	}
 	
 	//오늘을 기준으로 일주일 전 가계부
-	public ArrayList<MoneybookVO> selectWeekAgoMoneybook(){
+	public ArrayList<MoneybookVO> selectWeekAgoMoneybook(int StartRecord, int countPerPage){
 		
 		//1.오늘 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -61,14 +61,14 @@ public class MoneybookService {
 		map.put("start", stringWeekAgo);
 		map.put("end", stringToday);
 		
-		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map, StartRecord,countPerPage);
 		
 		//4.return 값으로 선택된 가계부 return 하기
 		return list;
 	}
 	
 	//오늘 기준 한달 전 가계부
-	public ArrayList<MoneybookVO> selectMonthAgoMoneybook() {
+	public ArrayList<MoneybookVO> selectMonthAgoMoneybook(int StartRecord, int countPerPage) {
 
 		//1.오늘 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,14 +90,14 @@ public class MoneybookService {
 		map.put("start", StringMonthAgo);
 		map.put("end", stringToday);
 		
-		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map, StartRecord,countPerPage);
 		
 		//4.return 값으로 선택된 가계부 return 하기
 		return list;
 	}
 		
 	//오늘 기준 6개월전 가계부
-	public ArrayList<MoneybookVO> selectSixMonthAgoMoneybook() {
+	public ArrayList<MoneybookVO> selectSixMonthAgoMoneybook(int StartRecord, int countPerPage) {
 		
 		//1.오늘 날짜 구하기(yyyy-mm-dd로 포맷 바꿔주기)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -119,7 +119,7 @@ public class MoneybookService {
 		map.put("start", stringSixMonthAgo);
 		map.put("end", stringToday);
 		
-		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map, StartRecord,countPerPage);
 		
 		//4.return 값으로 선택된 가계부 return 하기
 		return list;
@@ -419,6 +419,14 @@ public class MoneybookService {
 		
 		return dateList;
 	}
+	
+	public int boardTotal(String searchText) {
+		int amount = dao.boardTotal(searchText);
+		
+		
+		return amount;
+	}
+	
 
 	
 }
