@@ -14,9 +14,9 @@ public interface MoneybookMapper {
 
 	public ArrayList<MoneybookVO> selectAllMoneybook(int account_no);
 	
-	public int boardTotal(String searchText);
+	public int boardTotal(HashMap<String, Object> map);
 
-	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map, RowBounds rb);
+	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map);
 	
 	public int sumMoneybookAmount(HashMap<String, Object> map);
 

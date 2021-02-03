@@ -98,11 +98,15 @@
 			moneybook_type = '지출'
   	</select>
   	
-  	<select id="boardTotal" parameterType="string" resultType="int">
+  	<select id="boardTotal" parameterType="hashmap" resultType="int">
 	select 
 		count(*)
 	from 
 		moneybook_table
+	where
+		account_no = #{account_no}
+	and
+		moneybook_date between #{start} and #{end}
 	</select>
   
  </mapper>

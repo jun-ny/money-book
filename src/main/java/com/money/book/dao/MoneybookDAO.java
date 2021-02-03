@@ -45,15 +45,13 @@ public class MoneybookDAO {
 		
 	}
 	
-	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map, int startRecord, int countPerPage){
+	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map){
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		ArrayList<MoneybookVO> list = null;
 		
-		RowBounds rb = new RowBounds(startRecord, countPerPage);
-		
 		try {
-			list = mm.selectMoneybookDate(map, rb);
+			list = mm.selectMoneybookDate(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,12 +59,13 @@ public class MoneybookDAO {
 		return list;
 	}
 	
-	public int boardTotal(String searchText) {
+	public int boardTotal(HashMap<String, Object> map) {
+		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		int amount = 0;
 
 		try {
-			amount = mm.boardTotal(searchText);
+			amount = mm.boardTotal(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

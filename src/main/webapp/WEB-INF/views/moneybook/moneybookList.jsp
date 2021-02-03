@@ -61,35 +61,97 @@
 		}
 
 	}
-	var page = 1;  //페이징과 같은 방식이라고 생각하면 된다. 
-	 
-	$(function(){  //페이지가 로드되면 데이터를 가져오고 page를 증가시킨다.
-	     getList(page);
-	     page++;
-	}); 
-	 
-	$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
-	     if($(window).scrollTop() >= $(document).height() - $(window).height()){
-	          getList(page);
-	           page++;   
-	     } 
-	});
 
-	 <!-- 페이지 이동 스크립트-->
-	function pagingFormSubmit(currentPage) {
-		var form = document.getElementById('pagingForm');
-		var page = document.getElementById('page');
-		page.value = currentPage;
-		form.submit();
+	function selectWeekAgoMoneybook(){
+	    var arr;
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/moneybook/selectWeekAgoMoneybook',
+	        type:'get',
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+	        	arr = resp;
+	        }
+	    });
+	    
+	    return arr;
 	}
 
+	function selectWeekAgoMoneybookDate(){
+	    var arr;
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/moneybook/selectWeekAgoMoneybookDate',
+	        type:'get',
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+	        	arr = resp;
+	        }
+	    });
+	    
+	    return arr;
+	}
 
+	$(function(){
 
-	
-		   
+		var flag = true;
+		var list = selectWeekAgoMoneybook();
+		var dateList = selectWeekAgoMoneybookDate();
+	    var i = 3;
+	    var j = 5;
+	    var rowitem="";
+
+	    if(dateList.length<4){
+			flag = false;
+		}
+
+		//스크롤이 변경될때 마다 이벤트 발생시킴    
+	    $(window).scroll(function() {
+			//스크롤 창의 끝(scrollTop) == 문서 높이(document) - 브라우저창높이(window)
+	        if (Math.ceil($(window).scrollTop() + $(window).height()) == $(document).height()) {
+		        if(flag){
+					for(; i<j ; i++){
+						var date = dateList[i];
+
+						rowitem += 			'<tr style="background-color: #d1f5b4">';
+				        rowitem += 	    		'<th colspan="3" style="text-align: center;">'+date+'</th>';
+		                rowitem += 	    	'</tr>';
+
+		                for(var k=0 ; k<list.length ; k++){
+							if(date==list[k].moneybook_date){
+								rowitem +=  '<tr style="background-color: #edffe080">'
+								rowitem +=  '<td>'+list[k].moneybook_memo+'</td>'
+								rowitem +=  '<td>'+list[k].moneybook_amount+'</td>'
+								rowitem +=  '<td>'+list[k].moneybook_type+'</td>'
+								rowitem +=  '</tr>'
+							}
+			            }
+
+		                if(dateList.length-1 == i){
+							flag = false;
+							break;
+				        }
+					}
+		        }
+
+		        $("#font1").append(rowitem);
+				j += 3;
+		        rowitem = "";
+		        
+			}
+	    });
+   	});
+
 </script>
 </head>
 <body>
+
 	<div align="center">
 		<a href="/" class="display-3"><img
 			src="/resources/image/moneybook_logo.png"
@@ -186,28 +248,10 @@
 		</table>
 		
 		</div>
-<!-- 페이지 이동 부분 -->                      
-	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
-	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
-
-	<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
-		<c:if test="${counter == navi.currentPage}"><b></c:if>
-			<a id=font1 href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
-		<c:if test="${counter == navi.currentPage}"></b></c:if>
-	</c:forEach>
-	&nbsp;&nbsp;
-	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
-	<a id=font1 href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
 	</div> 
-	<form id="pagingForm" method="get" action="moneybookList">
-<input type="hidden" name="page" id="page" /> </form>
-  </div>
+ 	</div>
 
 	</div>
-	</div>
-	</div>
-	
-	
 
 </body>
 </html>
