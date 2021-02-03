@@ -21,6 +21,7 @@
   				,#{moneybook_category}
   				,#{moneybook_type}
   				,#{moneybook_memo}
+  				
   			)
   	</insert>
   	
@@ -79,7 +80,7 @@
 		where
 		    account_no = #{account_no}
 		and
-			moneybook_date = #{moneybook_date}
+			to_char(moneybook_date,'yyyy-mm-dd') = #{moneybook_date}
 		and
 			moneybook_type = '수입'
   	</select>
@@ -92,7 +93,7 @@
 		where
 		    account_no = #{account_no}
 		and
-			moneybook_date = #{moneybook_date}
+			to_char(moneybook_date,'yyyy-mm-dd') = #{moneybook_date}
 		and
 			moneybook_type = '지출'
   	</select>
@@ -103,7 +104,5 @@
 	from 
 		moneybook_table
 	</select>
-  
-  
   
  </mapper>

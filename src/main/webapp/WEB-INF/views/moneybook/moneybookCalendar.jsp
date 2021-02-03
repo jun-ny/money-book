@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
      var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth'
-    });
+
+     });
 
      var inMoneybook = getCalendarDataIn();
 	     $.each(inMoneybook, function(index, item){
@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	     $.each(outMoneybook, function(index, item){
 	      calendar.addEvent( item );
      });
-
-	 
 
      calendar.render();
  });
@@ -76,9 +74,9 @@ function getCalendarDataOut(){
 <style type="text/css">
 #calendar{
 		margin:0 auto;
-		width:800px;
+		width: 800px;
 		color: black;
-		height: 650px;
+		height: 600px;
 	}
 </style>
 </head>

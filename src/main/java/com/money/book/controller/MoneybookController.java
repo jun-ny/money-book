@@ -143,6 +143,8 @@ public class MoneybookController {
 	@RequestMapping(value = "/writeMoneybook", method = RequestMethod.GET)
 	public String writeMoneybook(MoneybookVO moneybook) {
 		
+		logger.info("작성된 가계부 {}",moneybook);
+		
 		String page = ms.writeMoneybook(moneybook);
 		
 		return page;

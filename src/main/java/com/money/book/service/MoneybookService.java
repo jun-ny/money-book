@@ -391,6 +391,7 @@ public class MoneybookService {
 				resultMap.put("title", "지출 "+amount);
 				resultMap.put("start", moneybook_date);
 				resultMap.put("end", moneybook_date);
+				resultMap.put("color", "red");
 				resultList.add(resultMap);
 			}
 		}
