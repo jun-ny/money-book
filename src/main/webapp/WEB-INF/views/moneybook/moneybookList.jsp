@@ -21,6 +21,16 @@
       #font2{
         font-family: 'Indie Flower', cursive;
       }
+      
+        table {
+    width: 100%;
+    border-top: 1px solid #3fb618;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #3fb618;
+    padding: 10px;
+  }
 </style>
 
 
