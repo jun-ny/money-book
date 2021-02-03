@@ -34,7 +34,7 @@
 							<li class="nav-item"><a class="nav-link"
 								href="/moneybook/moneybookList">가계부</a></li>
 
-							<li class="nav-item"><a class="nav-link" href="#">예비2</a></li>
+							<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookCalendar">달력</a></li>
 
 							<li class="nav-item"><a class="nav-link" href="#">예비3</a></li>
 						</ul>

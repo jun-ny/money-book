@@ -350,6 +350,55 @@ public class MoneybookService {
 		
 	}
 	
+	public ArrayList<HashMap<String, Object>> selectInMoneybook() {
+
+		int account_no = (int)session.getAttribute("loginNo");
+		
+		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		
+		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(account_no);
+		ArrayList<String> dateList = moneybookDate(list);
+		
+		for(String moneybook_date : dateList) {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			logger.info("no {} date {}",account_no, moneybook_date);
+			int amount = dao.selectInMoneybook(account_no, moneybook_date);
+			if(amount != 0) {
+				resultMap.put("title", "수입 "+amount);
+				resultMap.put("start", moneybook_date);
+				resultMap.put("end", moneybook_date);
+				resultList.add(resultMap);
+			}
+		}
+		
+		return resultList;
+	}
+	
+	public ArrayList<HashMap<String, Object>> selectOutMoneybook() {
+
+		int account_no = (int)session.getAttribute("loginNo");
+		
+		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		
+		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(account_no);
+		ArrayList<String> dateList = moneybookDate(list);
+		
+		for(String moneybook_date : dateList) {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			logger.info("no {} date {}",account_no, moneybook_date);
+			int amount = dao.selectOutMoneybook(account_no, moneybook_date);
+			if(amount != 0) {
+				resultMap.put("title", "지출 "+amount);
+				resultMap.put("start", moneybook_date);
+				resultMap.put("end", moneybook_date);
+				resultList.add(resultMap);
+			}
+		}
+		
+		return resultList;
+	}
+
+	
 	//가계부의 중복되는 날짜 빼기
 	public ArrayList<String> moneybookDate(ArrayList<MoneybookVO> list){
 		
@@ -370,6 +419,6 @@ public class MoneybookService {
 		
 		return dateList;
 	}
-	
+
 	
 }

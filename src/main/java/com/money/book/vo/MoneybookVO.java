@@ -13,4 +13,8 @@ public class MoneybookVO {
 	private String moneybook_memo;
 	private String moneybook_date;
 	
+	private String start;
+	private String end;
+	private String title;
+	
 }

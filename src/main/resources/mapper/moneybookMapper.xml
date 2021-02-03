@@ -70,6 +70,32 @@
 		and
 		    account_no = #{account_no}
   	</select>
+  	
+  	<select id="selectInMoneybook" parameterType="moneybook" resultType="int">
+  		select
+			sum(moneybook_amount)
+		from
+		    moneybook_table
+		where
+		    account_no = #{account_no}
+		and
+			moneybook_date = #{moneybook_date}
+		and
+			moneybook_type = '수입'
+  	</select>
+
+  	<select id="selectOutMoneybook" parameterType="moneybook" resultType="int">
+  		select
+			sum(moneybook_amount)
+		from
+		    moneybook_table
+		where
+		    account_no = #{account_no}
+		and
+			moneybook_date = #{moneybook_date}
+		and
+			moneybook_type = '지출'
+  	</select>
   
   
  </mapper>

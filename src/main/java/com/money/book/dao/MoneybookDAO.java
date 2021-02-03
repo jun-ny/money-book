@@ -71,6 +71,34 @@ public class MoneybookDAO {
 		
 		return amount;
 	}
+
+	public int selectInMoneybook(int account_no, String moneybook_date) {
+
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		int amount = 0;
+		
+		try {
+			amount = mm.selectInMoneybook(account_no, moneybook_date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return amount;
+	}
+
+	public int selectOutMoneybook(int account_no, String moneybook_date) {
+		
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		int amount = 0;
+		
+		try {
+			amount = mm.selectOutMoneybook(account_no, moneybook_date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return amount;
+	}
 	
 	
 }
