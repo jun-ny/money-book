@@ -79,34 +79,37 @@
 		
 		<c:choose>
 			<c:when test="${type == 'week' }">
-				<select onchange="changeMoneybook(this);">
+				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week" selected="selected">1주일</option>
 					<option value="month">1개월</option>
 					<option value="sixMonth">6개월</option>
 				</select>
 			</c:when>
 			<c:when test="${type == 'month' }">
-				<select onchange="changeMoneybook(this);">
+				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week">1주일</option>
 					<option value="month" selected="selected">1개월</option>
 					<option value="sixMonth">6개월</option>
 				</select>
 			</c:when>
 			<c:otherwise>
-				<select onchange="changeMoneybook(this);">
+				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week">1주일</option>
 					<option value="month">1개월</option>
 					<option value="sixMonth" selected="selected">6개월</option>
 				</select>
 			</c:otherwise>
 		</c:choose>
-	
-		<br>
+		
+		
+		
+		<div class="card border-primary mb-3" style="width:30%; text-align: center;">
+		
 
-		<table border="1">
+		<table border="1"  >
 			<c:forEach items="${dateList }" var="date">
 				<tr>
-					<td colspan="3" style="text-align: center">${date }</td>
+					<th colspan="3" style="text-align: center">${date }</th>
 				</tr>
 				<c:forEach items="${list }" var="list">
 					<c:if test="${date == list.moneybook_date }">
@@ -120,10 +123,32 @@
 			</c:forEach>
 		</table>
 		
-		<button onclick="moneybookList();">일일</button>
-		<button onclick="perWeekMoneybookList();">주별</button>
-		<button onclick="perMonthMoneybookList();">월별</button>
 		
+	</div>
+		<button class = "btn btn-outline-success" onclick="moneybookList();">일일</button>
+		<button class = "btn btn-outline-info" onclick="perWeekMoneybookList();">주별</button>
+		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
+	<br>
+	
+	<div id="navigator">
+	<!-- 페이지 이동 부분 -->                      
+	<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+	<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+
+	<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
+		<c:if test="${counter == navi.currentPage}"><b></c:if>
+			<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+		<c:if test="${counter == navi.currentPage}"></b></c:if>
+	</c:forEach>
+	&nbsp;&nbsp;
+	<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
+	<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
+	<!-- 페이지 이동 끝 -->   
+
+<form id="pagingForm" method="get" action="boardList">
+<input type="hidden" name="page" id="page" />
+</form>
+	</div>
 	</div>
 	</div>	
 	
