@@ -6,9 +6,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
 	rel="stylesheet">
+
+<style>
+  #font1{
+        font-family: 'Yeon Sung', cursive;
+        color: green;
+        font-size:large;
+      }
+      #font2{
+        font-family: 'Indie Flower', cursive;
+      }
+      
+        table {
+    width: 100%;
+    border-top: 1px solid #3fb618;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #3fb618;
+    padding: 10px;
+  }
+</style>
 
 <meta charset="UTF-8">
 <title>가계부</title>
@@ -68,7 +90,7 @@
 			</div>
 		</nav>
 
-		<div class="jumbotron">
+		<div class="jumbotron" style="background-color: #edffe0">
 		
 		<br>
 		
@@ -79,12 +101,12 @@
 		<button class = "btn btn-outline-danger" onclick="perMonthMoneybookList();">월별</button>
 		</div>
 		<div class="card border-primary mb-3" style="width:30%; text-align: center;">
-		<table border="1">
+		<table id="font1" border="1">
 			<c:forEach items="${list }" var="list">
-				<tr>
+				<tr style="background-color: #d1f5b4">
 					<th colspan="4" style="text-align: center;">${list.period }</th>
 				</tr>
-				<tr>
+				<tr style="background-color: #edffe080">
 					<td>${list.in }</td>
 					<td>${list.inAmount }</td>
 					<td>${list.out }</td>
