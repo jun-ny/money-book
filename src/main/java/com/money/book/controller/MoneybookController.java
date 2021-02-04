@@ -164,19 +164,38 @@ public class MoneybookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/selectWeekAgoMoneybook", method = RequestMethod.GET)
-	public ArrayList<MoneybookVO> selectWeekAgoMoneybook(){
+	@RequestMapping(value = "/selectBeforeMoneybook", method = RequestMethod.GET)
+	public ArrayList<MoneybookVO> selectBeforeMoneybook(String period){
 		
-		ArrayList<MoneybookVO> list = ms.selectWeekAgoMoneybook();
+		logger.info("period {} ", period);
+		ArrayList<MoneybookVO> list = null;
+		
+		if(period.equals("week")) {
+			 list = ms.selectWeekAgoMoneybook();
+		}else if(period.equals("month")) {
+			 list = ms.selectMonthAgoMoneybook();
+		}else {
+			list = ms.selectSixMonthAgoMoneybook();
+		}
 		
 		return list;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/selectWeekAgoMoneybookDate", method = RequestMethod.GET)
-	public ArrayList<String> selectWeekAgoMoneybookDate(){
+	@RequestMapping(value = "/selectBeforeMoneybookDate", method = RequestMethod.GET)
+	public ArrayList<String> selectBeforeMoneybookDate(String period){
 		
-		ArrayList<MoneybookVO> list = ms.selectWeekAgoMoneybook();
+		logger.info("period {} ", period);
+		ArrayList<MoneybookVO> list = null;
+		
+		if(period.equals("week")) {
+			list = ms.selectWeekAgoMoneybook();
+		}else if(period.equals("month")) {
+			list = ms.selectMonthAgoMoneybook();
+		}else {
+			list = ms.selectSixMonthAgoMoneybook();
+		}
+		
 		ArrayList<String> dateList = ms.moneybookDate(list);
 		
 		return dateList;

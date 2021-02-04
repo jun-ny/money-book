@@ -189,7 +189,6 @@ public class MoneybookService {
 			}
 			
 			return resultList;
-			
 		}else {
 			
 			int account_no = (int)session.getAttribute("loginNo");

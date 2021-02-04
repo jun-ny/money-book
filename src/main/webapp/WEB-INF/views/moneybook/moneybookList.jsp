@@ -62,14 +62,18 @@
 
 	}
 
-	function selectWeekAgoMoneybook(){
+	function selectBeforeMoneybook(){
 	    var arr;
+	    var period = $("#period").val();
 	    
 	    $.ajax({
 	        contentType:'application/json',
 	        dataType:'json',
-	        url:'/moneybook/selectWeekAgoMoneybook',
+	        url:'/moneybook/selectBeforeMoneybook',
 	        type:'get',
+	        data:{
+				period : period
+		    },
 	        async: false,
 	        success:function(resp){
 				console.log(resp);
@@ -80,14 +84,18 @@
 	    return arr;
 	}
 
-	function selectWeekAgoMoneybookDate(){
+	function selectBeforeMoneybookDate(){
 	    var arr;
+	    var period = $("#period").val();
 	    
 	    $.ajax({
 	        contentType:'application/json',
 	        dataType:'json',
-	        url:'/moneybook/selectWeekAgoMoneybookDate',
+	        url:'/moneybook/selectBeforeMoneybookDate',
 	        type:'get',
+	        data:{
+				period : period
+		    },
 	        async: false,
 	        success:function(resp){
 				console.log(resp);
@@ -101,15 +109,18 @@
 	$(function(){
 
 		var flag = true;
-		var list = selectWeekAgoMoneybook();
-		var dateList = selectWeekAgoMoneybookDate();
-	    var i = 3;
-	    var j = 5;
+		var list = selectBeforeMoneybook();
+		var dateList = selectBeforeMoneybookDate();
+	    var i = 3; //처음에 보여주는 갯수
+	    var j = 5; //i-j는 보여주고 싶은 갯수
 	    var rowitem="";
 
+		//3개면 스크롤 할 필요가 없으므로 false 즉, 3개 이상부터 스크롤 기능 활성화
 	    if(dateList.length<4){
 			flag = false;
 		}
+
+	    console.log(Math.ceil($(window).scrollTop() + $(window).height())+"="+$(document).height());
 
 		//스크롤이 변경될때 마다 이벤트 발생시킴    
 	    $(window).scroll(function() {
@@ -133,6 +144,7 @@
 							}
 			            }
 
+						//i가 리스트의 길이-1과 똑같다는 것은 더 이상 리스트가 없다는 뜻이므로 반복문 종료
 		                if(dateList.length-1 == i){
 							flag = false;
 							break;
@@ -141,7 +153,9 @@
 		        }
 
 		        $("#font1").append(rowitem);
+		        //다음에 또 반복문 돌리기 위해서 j 증가
 				j += 3;
+				//다음 삽입할 코드를 위해 초기화
 		        rowitem = "";
 		        
 			}
@@ -191,7 +205,7 @@
 		
 		<c:choose>
 			<c:when test="${type == 'week' }">
-				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
+				<select class="custom-select" id="period" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week" selected="selected">1주일</option>
 					<option value="month">1개월</option>
 					<option value="sixMonth">6개월</option>
@@ -199,7 +213,7 @@
 			</c:when>
 			
 			<c:when test="${type == 'month' }">
-				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
+				<select class="custom-select" id="period" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week">1주일</option>
 					<option value="month" selected="selected">1개월</option>
 					<option value="sixMonth">6개월</option>
@@ -209,7 +223,7 @@
 			</c:when>
 			
 			<c:otherwise>
-				<select class="custom-select" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
+				<select class="custom-select" id="period" style="width:10%; margin-bottom:10px;" onchange="changeMoneybook(this);">
 					<option value="week">1주일</option>
 					<option value="month">1개월</option>
 					<option value="sixMonth" selected="selected">6개월</option>
