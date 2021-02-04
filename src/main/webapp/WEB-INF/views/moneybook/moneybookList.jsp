@@ -112,10 +112,10 @@
 		var list = selectBeforeMoneybook();
 		var dateList = selectBeforeMoneybookDate();
 	    var i = 3; //처음에 보여주는 갯수
-	    var j = 5; //i-j는 보여주고 싶은 갯수
+	    var j = 5; //i-j는 보여주고 싶은 갯수(즉 2개씩 보여주고 싶음)
 	    var rowitem="";
 
-		//3개면 스크롤 할 필요가 없으므로 false 즉, 3개 이상부터 스크롤 기능 활성화
+		//3개까지는 스크롤 할 필요가 없으므로 false 즉, 3개 이상부터 스크롤 기능 활성화
 	    if(dateList.length<4){
 			flag = false;
 		}
@@ -154,7 +154,7 @@
 
 		        $("#font1").append(rowitem);
 		        //다음에 또 반복문 돌리기 위해서 j 증가
-				j += 3;
+				j += 2;
 				//다음 삽입할 코드를 위해 초기화
 		        rowitem = "";
 		        
