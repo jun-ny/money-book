@@ -36,17 +36,15 @@ public class MoneybookController {
 		ArrayList<String> tempDateList = ms.moneybookDate(list);
 		ArrayList<String> dateList = new ArrayList<String>();
 		
-		if(list.size()<=2) {
-			logger.info("dateList {}",tempDateList);
+		if(dateList.size()<=2) {
 			model.addAttribute("dateList", tempDateList);
 		}else {
+			logger.info("size {}",tempDateList.size());
 			for(int i = 0 ; i<3 ; i++) {
 				dateList.add(tempDateList.get(i));
 			}
-			logger.info("dateList {}",dateList);
 			model.addAttribute("dateList", dateList);
 		}
-		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("cnt", list.size());
@@ -62,7 +60,7 @@ public class MoneybookController {
 		ArrayList<String> tempDateList = ms.moneybookDate(list);
 		ArrayList<String> dateList = new ArrayList<String>();
 		
-		if(list.size()<=2) {
+		if(dateList.size()<=2) {
 			logger.info("dateList {}",tempDateList);
 			model.addAttribute("dateList", tempDateList);
 		}else {
@@ -87,7 +85,7 @@ public class MoneybookController {
 		ArrayList<String> tempDateList = ms.moneybookDate(list);
 		ArrayList<String> dateList = new ArrayList<String>();
 		
-		if(list.size()<=2) {
+		if(dateList.size()<=2) {
 			logger.info("dateList {}",tempDateList);
 			model.addAttribute("dateList", tempDateList);
 		}else {
