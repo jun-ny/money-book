@@ -36,15 +36,20 @@ public class MoneybookController {
 		ArrayList<String> tempDateList = ms.moneybookDate(list);
 		ArrayList<String> dateList = new ArrayList<String>();
 		
-		for(int i = 0 ; i<3 ; i++) {
-			dateList.add(tempDateList.get(i));
+		if(list.size()<=2) {
+			logger.info("dateList {}",tempDateList);
+			model.addAttribute("dateList", tempDateList);
+		}else {
+			for(int i = 0 ; i<3 ; i++) {
+				dateList.add(tempDateList.get(i));
+			}
+			logger.info("dateList {}",dateList);
+			model.addAttribute("dateList", dateList);
 		}
 		
-		logger.info("dateList {}",dateList);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("cnt", list.size());
-		model.addAttribute("dateList", dateList);
 		model.addAttribute("type", "week");
 		
 		return "moneybook/moneybookList";
@@ -57,13 +62,18 @@ public class MoneybookController {
 		ArrayList<String> tempDateList = ms.moneybookDate(list);
 		ArrayList<String> dateList = new ArrayList<String>();
 		
-		for(int i = 0 ; i<3 ; i++) {
-			dateList.add(tempDateList.get(i));
+		if(list.size()<=2) {
+			logger.info("dateList {}",tempDateList);
+			model.addAttribute("dateList", tempDateList);
+		}else {
+			for(int i = 0 ; i<3 ; i++) {
+				dateList.add(tempDateList.get(i));
+			}
+			logger.info("dateList {}",dateList);
+			model.addAttribute("dateList", dateList);
 		}
-
 		
 		model.addAttribute("list", list);
-		model.addAttribute("dateList", dateList);
 		model.addAttribute("type", "month");
 		model.addAttribute("cnt", list.size());
 		
@@ -77,12 +87,18 @@ public class MoneybookController {
 		ArrayList<String> tempDateList = ms.moneybookDate(list);
 		ArrayList<String> dateList = new ArrayList<String>();
 		
-		for(int i = 0 ; i<3 ; i++) {
-			dateList.add(tempDateList.get(i));
+		if(list.size()<=2) {
+			logger.info("dateList {}",tempDateList);
+			model.addAttribute("dateList", tempDateList);
+		}else {
+			for(int i = 0 ; i<3 ; i++) {
+				dateList.add(tempDateList.get(i));
+			}
+			logger.info("dateList {}",dateList);
+			model.addAttribute("dateList", dateList);
 		}
 		
 		model.addAttribute("list", list);
-		model.addAttribute("dateList", dateList);
 		model.addAttribute("type", "sixMonth");
 		model.addAttribute("cnt", list.size());
 

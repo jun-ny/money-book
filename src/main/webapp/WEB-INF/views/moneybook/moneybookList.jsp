@@ -130,16 +130,16 @@
 					for(; i<j ; i++){
 						var date = dateList[i];
 
-						rowitem += 			'<tr style="background-color: #d1f5b4">';
-				        rowitem += 	    		'<th colspan="3" style="text-align: center;">'+date+'</th>';
-		                rowitem += 	    	'</tr>';
+						rowitem += 	'<tr style="background-color: #d1f5b4">';
+				        rowitem += 		'<th colspan="3" style="text-align: center;">'+date+'</th>';
+		                rowitem += 	'</tr>';
 
 		                for(var k=0 ; k<list.length ; k++){
 							if(date==list[k].moneybook_date){
 								rowitem +=  '<tr style="background-color: #edffe080">'
-								rowitem +=  '<td>'+list[k].moneybook_memo+'</td>'
-								rowitem +=  '<td>'+list[k].moneybook_amount+'</td>'
-								rowitem +=  '<td>'+list[k].moneybook_type+'</td>'
+								rowitem +=  	'<td>'+list[k].moneybook_memo+'</td>'
+								rowitem +=  	'<td>'+list[k].moneybook_amount+'</td>'
+								rowitem +=  	'<td>'+list[k].moneybook_type+'</td>'
 								rowitem +=  '</tr>'
 							}
 			            }
