@@ -216,6 +216,22 @@ public class MoneybookController {
 		return dateList;
 	}
 	
+	@RequestMapping(value = "/moneybookGraph", method = RequestMethod.GET)
+	public String moneybookGraph() {
+		
+		return "moneybook/moneybookGraph";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/pieGraphOut", method = RequestMethod.GET)
+	public ArrayList<HashMap<String, Object>> pieGraphOut(){
+		
+		ArrayList<HashMap<String, Object>> list = ms.pieGraphOut();
+		logger.info("카테고리 별 퍼센티지 {}",list);
+		
+		return list;
+	}
+	
 	
 	
 	

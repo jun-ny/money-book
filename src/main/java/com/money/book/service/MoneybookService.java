@@ -350,12 +350,14 @@ public class MoneybookService {
 	}
 	
 	public ArrayList<HashMap<String, Object>> selectInMoneybook() {
-
+		
 		int account_no = (int)session.getAttribute("loginNo");
+		MoneybookVO moneybook = new MoneybookVO();
+		moneybook.setAccount_no(account_no);
 		
 		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
 		
-		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(account_no);
+		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
 		ArrayList<String> dateList = moneybookDate(list);
 		
 		for(String moneybook_date : dateList) {
@@ -376,10 +378,12 @@ public class MoneybookService {
 	public ArrayList<HashMap<String, Object>> selectOutMoneybook() {
 
 		int account_no = (int)session.getAttribute("loginNo");
+		MoneybookVO moneybook = new MoneybookVO();
+		moneybook.setAccount_no(account_no);
 		
 		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
 		
-		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(account_no);
+		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
 		ArrayList<String> dateList = moneybookDate(list);
 		
 		for(String moneybook_date : dateList) {
@@ -418,6 +422,54 @@ public class MoneybookService {
 		Collections.sort(dateList);
 		
 		return dateList;
+	}
+	
+	public ArrayList<HashMap<String, Object>> pieGraphOut() {
+
+		int account_no = (int)session.getAttribute("loginNo");
+		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		
+		MoneybookVO moneybook = new MoneybookVO();
+		moneybook.setAccount_no(account_no);
+		moneybook.setMoneybook_type("지출");
+		
+		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
+		ArrayList<String> categories = new ArrayList<String>();
+		
+		//전체 카테고리 수
+		int allCategoryCnt = list.size();
+		logger.info("전체 지출 갯수 {}",allCategoryCnt);
+		
+		//중복되는 카테고리 제거하기
+		for(MoneybookVO mb : list) {
+			
+			if(categories.isEmpty()) {
+				categories.add(mb.getMoneybook_category());
+			}else {
+				if(!categories.contains(mb.getMoneybook_category())) {
+					categories.add(mb.getMoneybook_category());
+				}
+			}
+			
+		}
+		
+		//디비 카테고리 보내서 몇개있는지 카운트 가져오고 계산 후 list에 담기
+		for(String moneybook_category : categories) {
+			
+			int cnt = dao.categoryCntOut(account_no, moneybook_category);
+			
+			logger.info("{} 의 갯수 {}",moneybook_category,cnt);
+			
+			double percentage = (cnt/(allCategoryCnt*1.0))*100;
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("name", moneybook_category);
+			resultMap.put("drilldown", moneybook_category);
+			resultMap.put("y", percentage);
+			resultList.add(resultMap);
+			
+		}
+		
+		return resultList;
 	}
 	
 	

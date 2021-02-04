@@ -25,7 +25,7 @@
   			)
   	</insert>
   	
-  	<select id="selectAllMoneybook" parameterType="int" resultType="moneybook">
+  	<select id="selectAllMoneybook" parameterType="moneybook" resultType="moneybook">
   		select
 		    moneybook_no
 		    ,account_no
@@ -38,8 +38,12 @@
 		    moneybook_table
 		where
 		    account_no = #{account_no}
+		<if test="moneybook_type != null">
+		and
+			moneybook_type = #{moneybook_type}		
+		</if>
 		order by
-		    moneybook_date desc	
+		    moneybook_date desc
   	</select>
   	
   	<select id="selectMoneybookDate" parameterType="hashmap" resultType="moneybook">
@@ -99,14 +103,29 @@
   	</select>
   	
   	<select id="boardTotal" parameterType="hashmap" resultType="int">
-	select 
-		count(*)
-	from 
-		moneybook_table
-	where
-		account_no = #{account_no}
-	and
-		moneybook_date between #{start} and #{end}
+		select 
+			count(*)
+		from 
+			moneybook_table
+		where
+			account_no = #{account_no}
+		and
+			moneybook_date between #{start} and #{end}
 	</select>
+	
+	<select id="categoryCntOut" parameterType="moneybook" resultType="int">
+		select
+		    count(moneybook_category)
+		from
+		    moneybook_table
+		where
+		    account_no = #{account_no}
+		and
+		    moneybook_category = #{moneybook_category}
+		and
+			moneybook_type = '지출'
+	</select>
+	
+	
   
  </mapper>

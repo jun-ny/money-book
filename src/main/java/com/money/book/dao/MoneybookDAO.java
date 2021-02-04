@@ -30,13 +30,13 @@ public class MoneybookDAO {
 		return cnt;
 	}
 	
-	public ArrayList<MoneybookVO> selectAllMoneybook(int account_no){
+	public ArrayList<MoneybookVO> selectAllMoneybook(MoneybookVO moneybook){
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		ArrayList<MoneybookVO> list = null;
 		
 		try {
-			list = mm.selectAllMoneybook(account_no);
+			list = mm.selectAllMoneybook(moneybook);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,6 +113,20 @@ public class MoneybookDAO {
 		}
 		
 		return amount;
+	}
+	
+	public int categoryCntOut(int account_no, String moneybook_category) {
+		
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		int cnt = 0;
+		
+		try {
+			cnt = mm.categoryCntOut(account_no, moneybook_category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
 	}
 	
 	

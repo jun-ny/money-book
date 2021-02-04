@@ -12,7 +12,7 @@ public interface MoneybookMapper {
 
 	public int writeMoneybook(MoneybookVO moneybook);
 
-	public ArrayList<MoneybookVO> selectAllMoneybook(int account_no);
+	public ArrayList<MoneybookVO> selectAllMoneybook(MoneybookVO moneybook);
 	
 	public int boardTotal(HashMap<String, Object> map);
 
@@ -24,5 +24,6 @@ public interface MoneybookMapper {
 
 	public int selectOutMoneybook(@Param("account_no")int account_no, @Param("moneybook_date")String moneybook_date);
 	
+	public int categoryCntOut(@Param("account_no")int account_no, @Param("moneybook_category")String moneybook_category);
 	
 }
