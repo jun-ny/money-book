@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
+	rel="stylesheet">
 <meta charset="UTF-8">
 <title>graph</title>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -86,6 +89,7 @@ $(function () {
     min-width: 320px; 
     max-width: 660px;
     margin: 1em auto;
+  
 }
 
 .highcharts-data-table table {
@@ -118,8 +122,48 @@ $(function () {
 </style>
 </head>
 <body>
+
+	<div align="center">
+		<a href="/" class="display-3"><img
+			src="/resources/image/moneybook_logo.png"
+			style="width: 20%; display: block; padding-bottom: 20px; padding-top: 20px;"></a>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">${sessionScope.loginId }의 가계부</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColor03" aria-controls="navbarColor03"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="/">Home <span
+							class="sr-only">(current)</span>
+					</a></li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="/moneybook/moneybookList">가계부</a></li>
+
+					<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookCalendar">달력</a></li>
+
+					<li class="nav-item active"><a class="nav-link" href="/moneybook/moneybookGraph">그래프</a></li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
+					<a href="/moneybook/writeMoneybookForm" class="btn btn-warning my-2 my-sm-0"
+						type="submit">가계부 작성</a>
+				</form>
+				<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
+					<a href="/account/logout" class="btn btn-secondary my-2 my-sm-0"
+						type="submit">로그아웃</a>
+				</form>
+			</div>
+		</nav>
+	
+				<div class="jumbotron" style="background-color: white">
+	
 	<figure class="highcharts-figure">
     	<div id="container"></div>
 	</figure>
+	</div>
+	</div>
 </body>
 </html>
