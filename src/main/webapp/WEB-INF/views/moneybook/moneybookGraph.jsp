@@ -15,75 +15,8 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script type="text/javascript" src="/resources/jquery-3.4.1.js"></script>
-<script type="text/javascript">
-function pieGraphOut(){
-	var arr;
-	
-	$.ajax({
-		url:"/moneybook/pieGraphOut"
-		,type:"get"
-		,dataType:'json'
-		,async: false
-		,success:function(data){
-			console.log(data);
-			arr = data;
-		}
-		,erorr:function(e){
-			console.log(e);
-		}
-	});
-
-	return arr;	
-}
-
-
-$(function () {
-	var arr = pieGraphOut();
-	
-	Highcharts.chart('container', {
-	    chart: {
-	        type: 'pie'
-	    },
-	    title: {
-	        text: 'category별 지출'
-	    },
-
-	    exporting: {
-	        enabled: false
-	    },
-
-	    credits: {
-            enabled: false
-        },
-
-		//퍼센티지 보이게 하는 부분
-	    plotOptions: {
-	        series: {
-	            dataLabels: {
-	                enabled: true,
-	                format: '{point.name}: {point.y:.1f}%'
-	            }
-	        }
-	    },
-
-	    //마우스 올렸을 때 부가설명 나오게 하는 부분
-	    tooltip: {
-	        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-	        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-	    },
-	    
-	    series: [
-	        {
-	            name: "Categories",
-	            colorByPoint: true,
-	            data: arr
-	        }
-	    ],
-	});
-
-	
-});
-</script>
+<script type="text/javascript" src="/resources/js/moneybookGraph.js"></script>
+<script type="text/javascript"></script>
 <style type="text/css">
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px; 
@@ -145,7 +78,7 @@ $(function () {
 
 					<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookCalendar">달력</a></li>
 
-					<li class="nav-item active"><a class="nav-link" href="/moneybook/moneybookGraph">그래프</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/moneybook/moneybookGraph">통계</a></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
 					<a href="/moneybook/writeMoneybookForm" class="btn btn-warning my-2 my-sm-0"
@@ -161,7 +94,8 @@ $(function () {
 				<div class="jumbotron" style="background-color: white">
 	
 	<figure class="highcharts-figure">
-    	<div id="container"></div>
+    	<div id="container1"></div>
+    	<div id="container2"></div>
 	</figure>
 	</div>
 	</div>

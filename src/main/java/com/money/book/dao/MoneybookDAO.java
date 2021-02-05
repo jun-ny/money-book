@@ -115,18 +115,32 @@ public class MoneybookDAO {
 		return amount;
 	}
 	
-	public int categoryCnt(int account_no, String moneybook_category, String moneybook_type) {
+	public int categoryAmount(int account_no, String moneybook_category, String moneybook_type) {
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		int cnt = 0;
 		
 		try {
-			cnt = mm.categoryCnt(account_no, moneybook_category, moneybook_type);
+			cnt = mm.categoryAmount(account_no, moneybook_category, moneybook_type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return cnt;
+	}
+	
+	public int sumMoneybookAmountType(MoneybookVO moneybook) {
+		
+		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
+		int amount = 0;
+		
+		try {
+			amount = mm.sumMoneybookAmountType(moneybook);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return amount;
 	}
 	
 	

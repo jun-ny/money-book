@@ -113,9 +113,20 @@
 			moneybook_date between #{start} and #{end}
 	</select>
 	
-	<select id="categoryCnt" parameterType="moneybook" resultType="int">
+	<select id="sumMoneybookAmountType" parameterType="moneybook" resultType="int">
+	select
+	    sum(moneybook_amount)
+	from
+	    moneybook_table
+	where
+	    account_no = #{account_no}
+	and
+	    moneybook_type = #{moneybook_type}
+	</select>
+	
+	<select id="categoryAmount" parameterType="moneybook" resultType="int">
 		select
-		    count(moneybook_category)
+		    sum(moneybook_amount)
 		from
 		    moneybook_table
 		where

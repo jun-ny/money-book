@@ -24,7 +24,9 @@ public interface MoneybookMapper {
 
 	public int selectOutMoneybook(@Param("account_no")int account_no, @Param("moneybook_date")String moneybook_date);
 	
-	public int categoryCnt(@Param("account_no")int account_no
+	public int sumMoneybookAmountType(MoneybookVO moneybook);
+	
+	public int categoryAmount(@Param("account_no")int account_no
 							,@Param("moneybook_category")String moneybook_category
 							,@Param("moneybook_type")String moneybook_type);
 	

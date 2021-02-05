@@ -432,13 +432,11 @@ public class MoneybookService {
 		MoneybookVO moneybook = new MoneybookVO();
 		moneybook.setAccount_no(account_no);
 		moneybook.setMoneybook_type("지출");
+		int outAllAmount = dao.sumMoneybookAmountType(moneybook);
+		logger.info("전체 수입 금액 {}",outAllAmount);
 		
 		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
 		ArrayList<String> categories = new ArrayList<String>();
-		
-		//전체 카테고리 수
-		int allCategoryCnt = list.size();
-		logger.info("전체 지출 갯수 {}",allCategoryCnt);
 		
 		//중복되는 카테고리 제거하기
 		for(MoneybookVO mb : list) {
@@ -453,14 +451,14 @@ public class MoneybookService {
 			
 		}
 		
-		//카테고리 디비 보내서 몇개있는지 카운트 가져오고 계산 후 list에 담기
+		//카테고리 디비 보내서 금액 가져와서 계산 후 list에 담기
 		for(String moneybook_category : categories) {
 			
-			int cnt = dao.categoryCnt(account_no, moneybook_category,"지출");
+			int outAmount = dao.categoryAmount(account_no, moneybook_category,"지출");
 			
-			logger.info("{} 의 갯수 {}",moneybook_category,cnt);
+			logger.info("{} 의 금액 {}",moneybook_category,outAmount);
 			
-			double percentage = (cnt/(allCategoryCnt*1.0))*100;
+			double percentage = (outAmount/(outAllAmount*1.0))*100;
 			HashMap<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("name", moneybook_category);
 			resultMap.put("drilldown", moneybook_category);
@@ -481,13 +479,12 @@ public class MoneybookService {
 		MoneybookVO moneybook = new MoneybookVO();
 		moneybook.setAccount_no(account_no);
 		moneybook.setMoneybook_type("수입");
+		int inAllAmount = dao.sumMoneybookAmountType(moneybook);
+		logger.info("전체 수입 금액 {}",inAllAmount);
 		
 		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
 		ArrayList<String> categories = new ArrayList<String>();
 		
-		//전체 카테고리 수
-		int allCategoryCnt = list.size();
-		logger.info("전체 수입 갯수 {}",allCategoryCnt);
 		
 		//중복되는 카테고리 제거하기
 		for(MoneybookVO mb : list) {
@@ -505,11 +502,11 @@ public class MoneybookService {
 		//카테고리 디비 보내서 몇개있는지 카운트 가져오고 계산 후 list에 담기
 		for(String moneybook_category : categories) {
 			
-			int cnt = dao.categoryCnt(account_no, moneybook_category,"수입");
+			int inAmount = dao.categoryAmount(account_no, moneybook_category,"수입");
 			
-			logger.info("{} 의 갯수 {}",moneybook_category,cnt);
+			logger.info("{} 의 금액 {}",moneybook_category,inAmount);
 			
-			double percentage = (cnt/(allCategoryCnt*1.0))*100;
+			double percentage = (inAmount/(inAllAmount*1.0))*100;
 			HashMap<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("name", moneybook_category);
 			resultMap.put("drilldown", moneybook_category);
