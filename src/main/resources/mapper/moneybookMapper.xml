@@ -113,7 +113,7 @@
 			moneybook_date between #{start} and #{end}
 	</select>
 	
-	<select id="categoryCntOut" parameterType="moneybook" resultType="int">
+	<select id="categoryCnt" parameterType="moneybook" resultType="int">
 		select
 		    count(moneybook_category)
 		from
@@ -123,7 +123,7 @@
 		and
 		    moneybook_category = #{moneybook_category}
 		and
-			moneybook_type = '지출'
+			moneybook_type = #{moneybook_type}
 	</select>
 	
 	

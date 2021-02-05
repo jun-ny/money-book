@@ -1,18 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>graph</title>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/drilldown.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script type="text/javascript" src="/resources/jquery-3.4.1.js"></script>
-<script type="text/javascript">
 function pieGraphOut(){
 	var arr;
 	
@@ -33,25 +18,6 @@ function pieGraphOut(){
 	return arr;	
 }
 
-function pieGraphIn(){
-	var arr;
-	
-	$.ajax({
-		url:"/moneybook/pieGraphIn"
-		,type:"get"
-		,dataType:'json'
-		,async: false
-		,success:function(data){
-			console.log(data);
-			arr = data;
-		}
-		,erorr:function(e){
-			console.log(e);
-		}
-	});
-
-	return arr;	
-}
 
 $(function () {
 	var arr = pieGraphOut();
@@ -94,14 +60,14 @@ $(function () {
 });
 
 $(function () {
-	var arr = pieGraphIn();
+	var arr = pieGraphOut();
 	
 	Highcharts.chart('container2', {
 	    chart: {
 	        type: 'pie'
 	    },
 	    title: {
-	        text: '전체 category별 수입'
+	        text: '전체 category별 지출'
 	    },
 	    exporting: {
 	        enabled: false
@@ -132,15 +98,3 @@ $(function () {
 	    ],
 	});
 });
-</script>
-<style type="text/css">
-
-</style>
-</head>
-<body>
-	<div id="maincontainer">
-    	<div id="container1"></div>
-    	<div id="container2"></div>
-	</div >
-</body>
-</html>

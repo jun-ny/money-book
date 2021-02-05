@@ -232,6 +232,17 @@ public class MoneybookController {
 		return list;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/pieGraphIn", method = RequestMethod.GET)
+	public ArrayList<HashMap<String, Object>> pieGraphIn(){
+		
+		ArrayList<HashMap<String, Object>> list = ms.pieGraphIn();
+		logger.info("카테고리 별 퍼센티지 {}",list);
+		
+		return list;
+		
+	}
+	
 	
 	
 	

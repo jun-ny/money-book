@@ -115,13 +115,13 @@ public class MoneybookDAO {
 		return amount;
 	}
 	
-	public int categoryCntOut(int account_no, String moneybook_category) {
+	public int categoryCnt(int account_no, String moneybook_category, String moneybook_type) {
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		int cnt = 0;
 		
 		try {
-			cnt = mm.categoryCntOut(account_no, moneybook_category);
+			cnt = mm.categoryCnt(account_no, moneybook_category, moneybook_type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
