@@ -3,6 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+<style>
+
+.banner1 {
+border-radius: 20px;
+}
+.banner1:hover {
+ opacity: 0.5;
+}
+</style>
+
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
 	rel="stylesheet">
@@ -48,6 +58,15 @@
 						</form>
 					</div>
 				</nav>
+				
+				<div class=jumbotron>
+		
+				<a href="">	<img class="banner1" style="width:35%" src="/resources/image/banner1.png"></a>	
+
+		
+				</div>
+				
+				
 
 			</c:when>
 

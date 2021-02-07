@@ -92,8 +92,8 @@
 	<div class="jumbotron" style="width: 20%;">
 	<div class="card border-primary mb-3" style="max-width: 20rem;">
   <div class="card-header" style="padding-bottom: 0px;"><marquee>💸</marquee></div>
-  <div class="card-body">
-	<form action="/moneybook/writeMoneybook" method="get" onsubmit="return checkForm();">
+  <div class="card-body" style="padding-right: 0px; padding-left: 0px;">
+	<form action="/moneybook/writeMoneybook" method="get" onsubmit="return checkForm();" style="align:center">
 	
 		<table style="margin-bottom:10px">
 			<tr>
