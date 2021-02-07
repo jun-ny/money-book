@@ -60,9 +60,10 @@ border-radius: 20px;
 				</nav>
 				
 				<div class=jumbotron>
-		
-				<a href="">	<img class="banner1" style="width:35%" src="/resources/image/banner1.png"></a>	
-
+				<a href="">	<img class="banner1" style="width:35%" src="/resources/image/banner1.png"></a><br>	
+		<a href="/moneybook/moneybookGraph">	<img class="banner1" style="width:15%" src="/resources/image/banner2.png"></a>
+				<a href="/moneybook/moneybookCalendar">	<img class="banner1" style="width:15%" src="/resources/image/banner3.png"></a>
+				
 		
 				</div>
 				
