@@ -1,3 +1,7 @@
+function moneybookColumn(){
+	location.href = "/moneybook/moneybookColumn";
+}
+
 function pieGraphOut(){
 	var arr;
 	var month = $("#selMonth").val();
@@ -48,7 +52,7 @@ function pieGraphIn(){
 
 function selectMonth(month){
 	var month = $(month).val();
-	location.href = "/moneybook/moneybookGraph?month="+month;
+	location.href = "/moneybook/moneybookPie?month="+month;
 }
 
 
@@ -137,7 +141,7 @@ $(function () {
 	        type: 'pie'
 	    },
 	    title: {
-	    	text: txt+' category별 지출'
+	    	text: txt+' category별 수입'
 	    },
 
 	    exporting: {

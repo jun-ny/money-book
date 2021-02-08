@@ -77,7 +77,7 @@
 
 					<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookCalendar">달력</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookGraph">통계</a></li>
+					<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookColumn">통계</a></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
 					<a href="/moneybook/writeMoneybookForm" class="btn btn-warning my-2 my-sm-0"
@@ -112,8 +112,6 @@
 					<td>${list.out }</td>
 					<td>${list.outAmount }</td>
 				</tr>
-			
-			
 			</c:forEach>
 		</table>
 		</div>

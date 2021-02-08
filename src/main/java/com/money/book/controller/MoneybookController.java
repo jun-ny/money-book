@@ -216,7 +216,7 @@ public class MoneybookController {
 		return dateList;
 	}
 	
-	@RequestMapping(value = "/moneybookGraph", method = RequestMethod.GET)
+	@RequestMapping(value = "/moneybookPie", method = RequestMethod.GET)
 	public String moneybookGraph(Model model, @RequestParam(defaultValue = "0")int month) {
 		
 		Calendar cal = Calendar.getInstance();
@@ -225,7 +225,7 @@ public class MoneybookController {
 		model.addAttribute("currentMonth", currentMonth);
 		model.addAttribute("month", month);
 		
-		return "moneybook/moneybookGraph";
+		return "moneybook/moneybookPie";
 	}
 	
 	@ResponseBody
@@ -246,10 +246,21 @@ public class MoneybookController {
 		logger.info("카테고리 별 퍼센티지 {}",list);
 		
 		return list;
-		
 	}
 	
-	
+	@RequestMapping(value = "/moneybookColumn", method = RequestMethod.GET)
+	public String moneybookColumn(Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ms.perMonthMoneybookList();
+		
+		logger.info("월단위 가계부 : {}",list);
+		
+		model.addAttribute("in", "수입");
+		model.addAttribute("out", "지출");
+		model.addAttribute("list", list);
+		
+		return "moneybook/moneybookColumn";
+	}
 	
 	
 	

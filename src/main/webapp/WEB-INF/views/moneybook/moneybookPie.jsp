@@ -15,14 +15,13 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script type="text/javascript" src="/resources/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="/resources/js/moneybookGraph.js"></script>
+<script type="text/javascript" src="/resources/js/moneybookPie.js"></script>
 <script type="text/javascript"></script>
 <style type="text/css">
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px; 
     max-width: 660px;
     margin: 1em auto;
-  
 }
 
 .highcharts-data-table table {
@@ -79,7 +78,7 @@
 
 					<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookCalendar">달력</a></li>
 
-					<li class="nav-item active"><a class="nav-link" href="/moneybook/moneybookGraph">통계</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/moneybook/moneybookColumn">통계</a></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
 					<a href="/moneybook/writeMoneybookForm" class="btn btn-warning my-2 my-sm-0"
@@ -92,15 +91,16 @@
 			</div>
 		</nav>
 	
-				<div class="jumbotron" style="background-color: white">
-	<span id="monthChange"></span>
-	<figure class="highcharts-figure">
-    	<div id="container1"></div>
-    	<div id="emptyBook1"></div>
-    	<div id="container2"></div>
-    	<div id="emptyBook2"></div>
-	</figure>
-	</div>
+		<div class="jumbotron" style="background-color: white">
+			<span id="monthChange"></span>
+			<button onclick="moneybookColumn();">년도 별 수입/지출</button>
+			<figure class="highcharts-figure">
+		    	<div id="container1"></div>
+		    	<div id="emptyBook1"></div>
+		    	<div id="container2"></div>
+		    	<div id="emptyBook2"></div>
+			</figure>
+		</div>
 	</div>
 </body>
 </html>
