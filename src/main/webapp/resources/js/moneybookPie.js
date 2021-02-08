@@ -61,7 +61,7 @@ $(function () {
 	var month = $("#month").val();
 	var txt = "";
 	
-	var item = "<select id='selMonth' onchange='selectMonth(this);'>";
+	var item = "<select id='selMonth' onchange='selectMonth(this);' class='custom-select' style='width:60px'>";
 
 	if(month == 0){
 		month = currentMonth;
@@ -100,6 +100,7 @@ $(function () {
 	        type: 'pie'
 	    },
 	    title: {
+	   	
 	        text: txt+' category별 지출'
 	    },
 

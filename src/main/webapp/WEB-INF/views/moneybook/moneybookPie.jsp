@@ -6,6 +6,7 @@
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
 	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>graph</title>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -18,14 +19,34 @@
 <script type="text/javascript" src="/resources/js/moneybookPie.js"></script>
 <script type="text/javascript"></script>
 <style type="text/css">
+
+#font1{
+        font-family: 'Yeon Sung', cursive;
+        color: green;
+        font-size:large;
+      }
+
+.con {
+	float: left;
+	width: 50%;
+	padding: 5px;
+}
+
+.align::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
 .highcharts-figure, .highcharts-data-table table {
+
     min-width: 320px; 
     max-width: 660px;
     margin: 1em auto;
 }
 
 .highcharts-data-table table {
-	font-family: Verdana, sans-serif;
+
 	border-collapse: collapse;
 	border: 1px solid #EBEBEB;
 	margin: 10px auto;
@@ -34,6 +55,7 @@
 	max-width: 500px;
 }
 .highcharts-data-table caption {
+
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
@@ -91,15 +113,18 @@
 			</div>
 		</nav>
 	
-		<div class="jumbotron" style="background-color: white">
+		<div class="jumbotron" id=font1 style="background-color: white">
+			
 			<span id="monthChange"></span>
-			<button onclick="moneybookColumn();">년도 별 수입/지출</button>
+			<button class="btn btn-success" onclick="moneybookColumn();">년도 별 수입/지출</button>
+			<div class="align">
 			<figure class="highcharts-figure">
-		    	<div id="container1"></div>
-		    	<div id="emptyBook1"></div>
-		    	<div id="container2"></div>
-		    	<div id="emptyBook2"></div>
+		   <!--  <div class="con" id="emptyBook2"></div> -->
+		    	<div class="con" id="container1"></div>
+		   <!--  	<div class="con" id="emptyBook1"></div> -->
+		    	<div class="con" id="container2"></div>
 			</figure>
+			</div>
 		</div>
 	</div>
 </body>
