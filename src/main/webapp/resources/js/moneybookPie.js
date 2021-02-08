@@ -56,7 +56,13 @@ function selectMonth(month){
 }
 
 
+
+
+
 $(function () {
+
+
+
 	var currentMonth = $("#currentMonth").val();
 	var month = $("#month").val();
 	var txt = "";
@@ -96,6 +102,9 @@ $(function () {
 	var arr2 = pieGraphIn();
 
 	Highcharts.chart('container1', {
+
+	
+	 
 	    chart: {
 	        type: 'pie'
 	    },
@@ -186,5 +195,8 @@ $(function () {
 		$("#emptyBook2").text("등록된 가계부가 없습니다.");
 	}
 
+	$(function() {
+	 $("#container1").css({"font-family": "fantasy"});
+	 }); 
 	
 });

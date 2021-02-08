@@ -119,10 +119,12 @@
 			<button class="btn btn-success" onclick="moneybookColumn();">년도 별 수입/지출</button>
 			<div class="align">
 			<figure class="highcharts-figure">
+
 		   <!--  <div class="con" id="emptyBook2"></div> -->
 		    	<div class="con" id="container1"></div>
 		   <!--  	<div class="con" id="emptyBook1"></div> -->
 		    	<div class="con" id="container2"></div>
+	
 			</figure>
 			</div>
 		</div>
