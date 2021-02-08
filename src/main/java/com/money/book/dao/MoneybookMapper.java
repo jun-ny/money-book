@@ -16,18 +16,25 @@ public interface MoneybookMapper {
 	
 	public int boardTotal(HashMap<String, Object> map);
 
-	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map);
+	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<String, Object> map);
 	
 	public int sumMoneybookAmount(HashMap<String, Object> map);
 
-	public int selectInMoneybook(@Param("account_no")int account_no, @Param("moneybook_date")String moneybook_date);
+	public int selectInMoneybook(@Param("account_no")int account_no
+								,@Param("moneybook_date")String moneybook_date);
 
-	public int selectOutMoneybook(@Param("account_no")int account_no, @Param("moneybook_date")String moneybook_date);
+	public int selectOutMoneybook(@Param("account_no")int account_no
+								,@Param("moneybook_date")String moneybook_date);
 	
-	public int sumMoneybookAmountType(MoneybookVO moneybook);
+	public int sumMoneybookAmountType(@Param("account_no")int account_no
+									,@Param("moneybook_type")String moneybook_type
+									,@Param("start")String start
+									,@Param("end")String end);
 	
 	public int categoryAmount(@Param("account_no")int account_no
 							,@Param("moneybook_category")String moneybook_category
-							,@Param("moneybook_type")String moneybook_type);
+							,@Param("moneybook_type")String moneybook_type
+							,@Param("start")String start
+							,@Param("end")String end);
 	
 }

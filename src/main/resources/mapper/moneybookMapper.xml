@@ -59,8 +59,14 @@
 		    moneybook_table
 		where
 			account_no = #{account_no} 
+		<if test="start != '' and end !=''">
 		and
 		    moneybook_date between #{start} and #{end}
+		</if>
+		<if test="moneybook_type != null">
+		and
+			moneybook_type = #{moneybook_type}		
+		</if>
   	</select>
   
   	<select id="sumMoneybookAmount" parameterType="hashmap" resultType="int">
@@ -113,7 +119,7 @@
 			moneybook_date between #{start} and #{end}
 	</select>
 	
-	<select id="sumMoneybookAmountType" parameterType="moneybook" resultType="int">
+	<select id="sumMoneybookAmountType" parameterType="String" resultType="int">
 	select
 	    sum(moneybook_amount)
 	from
@@ -122,9 +128,13 @@
 	    account_no = #{account_no}
 	and
 	    moneybook_type = #{moneybook_type}
+	<if test="start != '' and end !=''">
+		and
+   			moneybook_date between #{start} and #{end}
+	</if>
 	</select>
 	
-	<select id="categoryAmount" parameterType="moneybook" resultType="int">
+	<select id="categoryAmount" parameterType="String" resultType="int">
 		select
 		    sum(moneybook_amount)
 		from
@@ -135,6 +145,10 @@
 		    moneybook_category = #{moneybook_category}
 		and
 			moneybook_type = #{moneybook_type}
+		<if test="start != '' and end !=''">
+		and
+   			moneybook_date between #{start} and #{end}
+		</if>
 	</select>
 	
 	

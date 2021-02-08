@@ -217,16 +217,22 @@ public class MoneybookController {
 	}
 	
 	@RequestMapping(value = "/moneybookGraph", method = RequestMethod.GET)
-	public String moneybookGraph() {
+	public String moneybookGraph(Model model, @RequestParam(defaultValue = "0")int month) {
+		
+		Calendar cal = Calendar.getInstance();
+		int currentMonth = cal.get(Calendar.MONTH) + 1;
+		
+		model.addAttribute("currentMonth", currentMonth);
+		model.addAttribute("month", month);
 		
 		return "moneybook/moneybookGraph";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/pieGraphOut", method = RequestMethod.GET)
-	public ArrayList<HashMap<String, Object>> pieGraphOut(){
+	public ArrayList<HashMap<String, Object>> pieGraphOut(int month){
 		
-		ArrayList<HashMap<String, Object>> list = ms.pieGraphOut();
+		ArrayList<HashMap<String, Object>> list = ms.pieGraphOut(month);
 		logger.info("카테고리 별 퍼센티지 {}",list);
 		
 		return list;
@@ -234,9 +240,9 @@ public class MoneybookController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/pieGraphIn", method = RequestMethod.GET)
-	public ArrayList<HashMap<String, Object>> pieGraphIn(){
+	public ArrayList<HashMap<String, Object>> pieGraphIn(int month){
 		
-		ArrayList<HashMap<String, Object>> list = ms.pieGraphIn();
+		ArrayList<HashMap<String, Object>> list = ms.pieGraphIn(month);
 		logger.info("카테고리 별 퍼센티지 {}",list);
 		
 		return list;

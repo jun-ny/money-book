@@ -55,7 +55,8 @@
 </style>
 </head>
 <body>
-
+	<input type="hidden" value="${currentMonth }" id="currentMonth">
+	<input type="hidden" value="${month }" id="month">
 	<div align="center">
 		<a href="/" class="display-3"><img
 			src="/resources/image/moneybook_logo.png"
@@ -92,10 +93,12 @@
 		</nav>
 	
 				<div class="jumbotron" style="background-color: white">
-	
+	<span id="monthChange"></span>
 	<figure class="highcharts-figure">
     	<div id="container1"></div>
+    	<div id="emptyBook1"></div>
     	<div id="container2"></div>
+    	<div id="emptyBook2"></div>
 	</figure>
 	</div>
 	</div>

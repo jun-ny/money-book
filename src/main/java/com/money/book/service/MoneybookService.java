@@ -54,7 +54,7 @@ public class MoneybookService {
 		logger.info("일주일 전 :{} ~ {}",stringWeekAgo,stringToday);
 		
 		//3.DB에서 해당 날 사이에 있는 가계부 가져오기
-		HashMap<Object, String> map = new HashMap<Object, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String account_no = Integer.toString((int)session.getAttribute("loginNo"));
 		
 		map.put("account_no",account_no);
@@ -83,7 +83,7 @@ public class MoneybookService {
 		logger.info("한달 전 :{} ~ {}",StringMonthAgo,stringToday);
 		
 		//3.DB에서 해당 날 사이에 있는 가계부 가져오기
-		HashMap<Object, String> map = new HashMap<Object, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String account_no = Integer.toString((int)session.getAttribute("loginNo"));
 		
 		map.put("account_no",account_no);
@@ -112,7 +112,7 @@ public class MoneybookService {
 		logger.info("6개월전 :{} ~ {}",stringSixMonthAgo,stringToday);
 		
 		//3.DB에서 해당 날 사이에 있는 가계부 가져오기
-		HashMap<Object, String> map = new HashMap<Object, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String account_no = Integer.toString((int)session.getAttribute("loginNo"));
 		
 		map.put("account_no",account_no);
@@ -424,18 +424,71 @@ public class MoneybookService {
 		return dateList;
 	}
 	
-	public ArrayList<HashMap<String, Object>> pieGraphOut() {
+	public ArrayList<HashMap<String, Object>> pieGraphOut(int no) {
 
 		int account_no = (int)session.getAttribute("loginNo");
 		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		MoneybookVO moneybook = new MoneybookVO();
-		moneybook.setAccount_no(account_no);
-		moneybook.setMoneybook_type("지출");
-		int outAllAmount = dao.sumMoneybookAmountType(moneybook);
-		logger.info("전체 수입 금액 {}",outAllAmount);
+		int outAllAmount = 0;
+		String start = "";
+		String end = "";
 		
-		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
+		if(no==100) {
+			
+			outAllAmount = dao.sumMoneybookAmountType(account_no,"지출",start,end);
+			logger.info("전체 지출 금액 {}",outAllAmount);
+			
+			map.put("account_no", account_no);
+			map.put("start", "");
+			map.put("end", "");
+			map.put("moneybook_type", "지출");
+			
+		}else {
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			int month = no;
+			start = year+"-"+month+"-1";
+			int lastDay = 0;
+			
+			if(month==1) {
+				lastDay = 31;
+			}else if(month==2) {
+				lastDay = 28;
+			}else if(month==3) {
+				lastDay = 31;
+			}else if(month==4) {
+				lastDay = 30;
+			}else if(month==5) {
+				lastDay = 31;
+			}else if(month==6) {
+				lastDay = 30;
+			}else if(month==7) {
+				lastDay = 31;
+			}else if(month==8) {
+				lastDay = 31;
+			}else if(month==9) {
+				lastDay = 30;
+			}else if(month==10) {
+				lastDay = 31;
+			}else if(month==11) {
+				lastDay = 30;
+			}else if(month==12) {
+				lastDay = 31;
+			}
+			
+			end = year+"-"+month+"-"+lastDay;
+			
+			outAllAmount = dao.sumMoneybookAmountType(account_no,"지출",start,end);
+			logger.info("{}~{} 전체 지출 금액 {}",start,end,outAllAmount);
+
+			map.put("account_no", account_no);
+			map.put("start", start);
+			map.put("end", end);
+			map.put("moneybook_type", "지출");
+		}
+		
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
 		ArrayList<String> categories = new ArrayList<String>();
 		
 		//중복되는 카테고리 제거하기
@@ -454,9 +507,13 @@ public class MoneybookService {
 		//카테고리 디비 보내서 금액 가져와서 계산 후 list에 담기
 		for(String moneybook_category : categories) {
 			
-			int outAmount = dao.categoryAmount(account_no, moneybook_category,"지출");
+			int outAmount = dao.categoryAmount(account_no, moneybook_category,"지출",start,end);
 			
-			logger.info("{} 의 금액 {}",moneybook_category,outAmount);
+			if(start == "" && end == "") {
+				logger.info("{} 의 금액 {}",moneybook_category,outAmount);
+			}else {
+				logger.info("{}~{} {} 의 금액 {}",start,end,moneybook_category,outAmount);
+			}
 			
 			double percentage = (outAmount/(outAllAmount*1.0))*100;
 			HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -464,25 +521,80 @@ public class MoneybookService {
 			resultMap.put("drilldown", moneybook_category);
 			resultMap.put("y", percentage);
 			resultList.add(resultMap);
-			
+				
 		}
 		
 		return resultList;
 	}
 
 	
-	public ArrayList<HashMap<String, Object>> pieGraphIn() {
+	public ArrayList<HashMap<String, Object>> pieGraphIn(int no) {
 
 		int account_no = (int)session.getAttribute("loginNo");
 		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		MoneybookVO moneybook = new MoneybookVO();
-		moneybook.setAccount_no(account_no);
-		moneybook.setMoneybook_type("수입");
-		int inAllAmount = dao.sumMoneybookAmountType(moneybook);
-		logger.info("전체 수입 금액 {}",inAllAmount);
+		int inAllAmount = 0;
+		String start = "";
+		String end = "";
 		
-		ArrayList<MoneybookVO> list = dao.selectAllMoneybook(moneybook);
+		if(no==100) {
+			
+			inAllAmount = dao.sumMoneybookAmountType(account_no,"수입",start,end);
+			logger.info("전체 지출 금액 {}",inAllAmount);
+			
+			map.put("account_no", account_no);
+			map.put("start", "");
+			map.put("end", "");
+			map.put("moneybook_type", "수입");
+			
+		}else {
+		
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			int month = no;
+			start = year+"-"+month+"-1";
+			int lastDay = 0;
+			
+			if(month==1) {
+				lastDay = 31;
+			}else if(month==2) {
+				lastDay = 28;
+			}else if(month==3) {
+				lastDay = 31;
+			}else if(month==4) {
+				lastDay = 30;
+			}else if(month==5) {
+				lastDay = 31;
+			}else if(month==6) {
+				lastDay = 30;
+			}else if(month==7) {
+				lastDay = 31;
+			}else if(month==8) {
+				lastDay = 31;
+			}else if(month==9) {
+				lastDay = 30;
+			}else if(month==10) {
+				lastDay = 31;
+			}else if(month==11) {
+				lastDay = 30;
+			}else if(month==12) {
+				lastDay = 31;
+			}
+			
+			end = year+"-"+month+"-"+lastDay;
+			
+			inAllAmount = dao.sumMoneybookAmountType(account_no,"수입",start,end);
+			logger.info("{} ~ {}전체 수입 금액 {}",start,end ,inAllAmount);
+			
+			map.put("account_no", account_no);
+			map.put("start", start);
+			map.put("end", end);
+			map.put("moneybook_type", "수입");
+			
+		}
+		
+		ArrayList<MoneybookVO> list = dao.selectMoneybookDate(map);
 		ArrayList<String> categories = new ArrayList<String>();
 		
 		
@@ -502,9 +614,13 @@ public class MoneybookService {
 		//카테고리 디비 보내서 몇개있는지 카운트 가져오고 계산 후 list에 담기
 		for(String moneybook_category : categories) {
 			
-			int inAmount = dao.categoryAmount(account_no, moneybook_category,"수입");
-			
-			logger.info("{} 의 금액 {}",moneybook_category,inAmount);
+			int inAmount = dao.categoryAmount(account_no, moneybook_category,"수입",start, end);
+
+			if(start == "" && end == "") {
+				logger.info("{} 의 금액 {}",moneybook_category,inAmount);
+			}else {
+				logger.info("{}~{} {} 의 금액 {}",start,end,moneybook_category,inAmount);
+			}
 			
 			double percentage = (inAmount/(inAllAmount*1.0))*100;
 			HashMap<String, Object> resultMap = new HashMap<String, Object>();

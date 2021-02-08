@@ -45,7 +45,7 @@ public class MoneybookDAO {
 		
 	}
 	
-	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<Object, String> map){
+	public ArrayList<MoneybookVO> selectMoneybookDate(HashMap<String, Object> map){
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		ArrayList<MoneybookVO> list = null;
@@ -115,13 +115,17 @@ public class MoneybookDAO {
 		return amount;
 	}
 	
-	public int categoryAmount(int account_no, String moneybook_category, String moneybook_type) {
+	public int categoryAmount(int account_no
+							,String moneybook_category
+							,String moneybook_type
+							,String start
+							,String end) {
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		int cnt = 0;
 		
 		try {
-			cnt = mm.categoryAmount(account_no, moneybook_category, moneybook_type);
+			cnt = mm.categoryAmount(account_no, moneybook_category, moneybook_type, start, end);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,13 +133,13 @@ public class MoneybookDAO {
 		return cnt;
 	}
 	
-	public int sumMoneybookAmountType(MoneybookVO moneybook) {
+	public int sumMoneybookAmountType(int account_no,String moneybook_type, String start, String end ) {
 		
 		MoneybookMapper mm = ss.getMapper(MoneybookMapper.class);
 		int amount = 0;
 		
 		try {
-			amount = mm.sumMoneybookAmountType(moneybook);
+			amount = mm.sumMoneybookAmountType(account_no, moneybook_type ,start, end);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
