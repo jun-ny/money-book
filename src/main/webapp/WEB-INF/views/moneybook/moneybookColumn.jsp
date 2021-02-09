@@ -88,12 +88,56 @@ function moneybookPie(){
 #datatable tr:hover {
     background: #f1f7ff;
 }
+
+ #font1{
+        font-family: 'Yeon Sung', cursive;
+        font-size:large;
+      }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
+	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
+	<div align=center>
+<a href="/" class="display-3"><img
+			src="/resources/image/moneybook_logo.png"
+			style="width: 20%; display: block; padding-bottom: 20px; padding-top: 20px;"></a>
+					<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="#">${sessionScope.loginId }의 가계부</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarColor03" aria-controls="navbarColor03"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarColor03">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="/">Home
+									<span class="sr-only">(current)</span>
+							</a></li>
+
+							<li class="nav-item"><a class="nav-link"
+								href="/moneybook/moneybookList">가계부</a></li>
+
+							<li class="nav-item"><a class="nav-link" href="/moneybook/moneybookCalendar">달력</a></li>
+
+							<li class="nav-item active"><a class="nav-link" href="/moneybook/moneybookColumn">통계</a></li>
+						</ul>
+						<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
+							<a href="/moneybook/writeMoneybookForm" class="btn btn-warning my-2 my-sm-0"
+								type="submit">가계부 작성</a>
+						</form>
+						<form class="form-inline my-2 my-lg-0" style="padding-left: 5px;">
+							<a href="/account/logout" class="btn btn-secondary my-2 my-sm-0"
+								type="submit">로그아웃</a>
+						</form>
+					</div>
+				</nav>
+
 	<figure class="highcharts-figure">
-	<button onclick="moneybookPie();">카테고리 별</button>
+	<button id="font1" class="btn btn-success" onclick="moneybookPie();">카테고리 별</button>
     <div id="container"></div>
     <table id="datatable">
         <thead>
@@ -114,5 +158,7 @@ function moneybookPie(){
         </c:forEach>
     </table>
 </figure>
+</div>
+
 </body>
 </html>
